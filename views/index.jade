@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name="viewport" content="width=device-width")
+    meta(name='description', content='audio lib')
+    link(rel='stylesheet', href='css/main.css')
+    script(src="js/lodash.min.js")
+    script(src="js/min.js")
+    script(src="js/temp.js")
+  body
+    header
+      - var props  = ['title','parentId','dateAdded','hash','hostname','origin','pathname','protocol','search']
+      h4 sort by
+      nav
+        each val, key in props
+          button(id=val) #{val}
+
+    label#search search
+      input(type="text", placeholder="placeholder")
+
+    div#bookmarks
+
+    script(src='js/main.js')

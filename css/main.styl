@@ -1,0 +1,113 @@
+support-for-ie  = false
+vendor-prefixes = official
+
+@import '../node_modules/nib'
+@import 'reset'
+
+
+step = 16px
+
+html, body
+  min-width 600px
+  height 100%
+
+body
+  color #333
+  font normal 13px/step Helvetica, arial, freesans, clean, sans-serif
+
+.head
+  background #f3f3f3 linear-gradient(#f9f9f9, #f3f3f3) repeat-x
+  text-shadow 0 1px 0 #fff
+
+.btn
+  border 1px solid #ccc
+  background #fff linear-gradient(#fff, #eee) repeat-x
+  text-shadow 0 1px 0 #fff
+  padding 0 (step/2)
+  cursor pointer
+  line-height (step*1.5)
+
+header
+  @extend .head
+  padding (step/2)
+  h4
+    display inline-block
+
+nav
+  font-size 0
+  display inline-block
+
+  button
+    @extend .btn
+    margin: 0 0 0 -1px
+    &:nth-child(1)
+      border-radius 3px 0 0 3px
+    &:last-child
+      border-radius 0 3px 3px 0
+
+label
+  iconic-stroke('../node_modules/nib/iconic')
+  display block
+  padding 0 (step/4)
+  border-bottom 1px solid #e5e5e5
+  line-height (step*3)
+  input
+    padding 0 (step/4)
+    border 1px solid #ddd
+    line-height (step*2)
+    border-radius 5px
+
+#bookmarks
+  padding (step*2)
+  position relative
+  li
+    font-size 0
+    vertical-align top
+    position relative
+
+    ul
+      vertical-align top
+      padding 0 0 0 16px
+      clearfix()
+      box-shadow 0 -1px 0 0 skyblue
+      position absolute
+      opacity 0
+      transition all 0.35s
+
+    a
+      vertical-align top
+      overflow hidden
+      text-decoration none
+  .kid
+    float left
+    size: (step*2)
+    > a
+      size: (step*2)
+      display inline-block
+      background skyblue
+      color #fff
+      box-shadow 0 0 0 1px #fff
+      &:hover
+        position  absolute
+        size: (step*8)
+        padding (step/2)
+        z-index 999
+        background crimson
+        font-size 12px
+  .dad
+    box-shadow -1px 0 0 skyblue
+    clear both
+    > a
+      box-shadow 0 -1px 0 skyblue
+      padding 0 8px
+      display block
+      font-size 12px
+      color skyblue
+      line-height (step*2)
+
+  .show
+    > a
+      background mistyrose
+    > ul
+      position relative
+      opacity 1

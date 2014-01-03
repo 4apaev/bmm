@@ -1,0 +1,18 @@
+{
+  "name": "bookmarksTool",
+  "description": "bookmarks tool",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=0.10.24"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "dependencies": {
+    "colors": "latest",
+    "jade": ">=1.0.0",
+    "stylus": "latest",
+    "nib": "latest",
+    "lodash": "~2.4.1"
+  }
+}
