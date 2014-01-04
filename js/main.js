@@ -55,23 +55,14 @@ var  bmm = {
   },
 
   init : function(tree) {
-    console.time('dump');
     this.origin = db;
     this.dump = this.flattenTree(this.origin, {});
     $("#bookmarks").html(this.walk(this.origin, []).join(''));
-    this.doSome();
-    console.timeEnd('dump');
-  },
-
-  doSome: function() {
     $('.bmdir > a').on('click', function(e) {
       e.preventDefault();
       e.target.dad().classList.toggle('show');
-    })
-
-    var fn = this.doFind.bind(this);
-    $('#search').on('change', fn);
-    $('.find').on('click', fn);
+    });
+    $('.find').on('click', this.doFind.bind(this));
   },
 
   showSearchResults: function(res) {
@@ -85,12 +76,10 @@ var  bmm = {
   doFind: function() {
     var val = $('#search').value.trim();
     if(!val) return;
-    var
-      sort = _.find($('.sort input[name="sort"]'), 'checked').value,
-      rgx  = _.find($('.search input[name="rgx"]'), 'checked').value;
+    var sort = _.find($('.sort input[name="sort"]'), 'checked').value,
+        rgx  = _.find($('.search input[name="rgx"]'), 'checked').value;
     this.doSearch(val, sort, rgx);
   },
-
 
   getSerachMethod: function(key) {
     return (key === 'date') ? function(node) {
@@ -101,7 +90,6 @@ var  bmm = {
   },
 
   doSearch: function(inp, sortKey, opt) {
-    console.log(sortKey, opt);
     var
        rgx = new RegExp(inp, "gi")
       ,res = _.chain(this.dump)
@@ -109,8 +97,6 @@ var  bmm = {
               .groupBy(this.getSerachMethod(sortKey), this)
               .map(function( group, key ) { return group.length > 1 ? { title:key, children: group } : group[0] })
 
-
-    console.log(res);
     this.showSearchResults(res);
   }
 }
