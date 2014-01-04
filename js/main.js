@@ -14,11 +14,12 @@ var  bmm = {
 
   handleObj: function(obj, res) {
     var
-      mark   = !!obj.children ? 'class="bmdir" data-children="' + obj.children.length + '"' : 'class="bmark"',
+      kids   = !!obj.children ? obj.children.length : 0
+      mark   = !!kids ? 'class="bmdir" data-children="' + kids + '"' : 'class="bmark"',
       url    = !!obj.url ? obj.url : '#',
       title  = !!obj.title ? obj.title : 'no title';
 
-    res.push('<li ' + mark  + '><a class="ico" href="' + url + '">' + title + '</a>');
+    res.push('<li ' + mark  + '><a class="ico" href="' + url + '">' + title + (!!kids ? ' - ' + kids : '') + '</a>');
     this.walk(obj, res);
     res.push('</li>');
   },
@@ -39,7 +40,7 @@ var  bmm = {
     return res;
   },
 
-  parseUrl : function(dateStr) {
+  parseDate : function(dateStr) {
     return new Date(parseInt(dateStr, 10)).toLocaleDateString();
   },
 
@@ -68,24 +69,49 @@ var  bmm = {
       e.target.dad().classList.toggle('show');
     })
 
-    $('#search').on('change', function(e) {
-      if(!e.target.value.trim()) return;
-      this.doSearch(e.target.value.trim(), _.find($('.search .btn-group input'), 'checked'));
-    }.bind(this))
-
+    var fn = this.doFind.bind(this);
+    $('#search').on('change', fn);
+    $('.find').on('click', fn);
   },
 
-  // showSearchResults: function(res) {
-  //   $(".search .results").html(this.walk(res, []).join(''));
-  // },
+  showSearchResults: function(res) {
+    $(".results").html('<ul>' + this.walk(res, []).join('') + '</ul>');
+    $('.results .bmdir > a').on('click', function(e) {
+      e.preventDefault();
+      e.target.dad().classList.toggle('show');
+    })
+  },
 
-  doSearch: function(inp, opt) {
+  doFind: function() {
+    var val = $('#search').value.trim();
+    if(!val) return;
+    var
+      sort = _.find($('.sort input[name="sort"]'), 'checked').value,
+      rgx  = _.find($('.search input[name="rgx"]'), 'checked').value;
+    this.doSearch(val, sort, rgx);
+  },
+
+
+  getSerachMethod: function(key) {
+    return (key === 'date') ? function(node) {
+      return this.parseDate(node.dateAdded);
+    } : function(node) {
+      return this.parseUrl(node.url)[key];
+    }
+  },
+
+  doSearch: function(inp, sortKey, opt) {
+    console.log(sortKey, opt);
     var
        rgx = new RegExp(inp, "gi")
-      ,out = _.filter(this.dump, function(v,k) { return rgx.test(k)});
+      ,res = _.chain(this.dump)
+              .filter(function(node, path) { return rgx.test(path)})
+              .groupBy(this.getSerachMethod(sortKey), this)
+              .map(function( group, key ) { return group.length > 1 ? { title:key, children: group } : group[0] })
 
-    console.log(inp, opt, out);
 
+    console.log(res);
+    this.showSearchResults(res);
   }
 }
 
