@@ -13,22 +13,19 @@ var  bmm = {
   },
 
   handleObj: function(obj, res) {
-
     var
-      dad    = !!obj.children ? 'class="dad"' : 'class="kid col"',
+      mark   = !!obj.children ? 'class="bmdir" data-children="' + obj.children.length + '"' : 'class="bmark"',
       url    = !!obj.url ? obj.url : '#',
-      title  = !!obj.title ? obj.title : 'no title',
-      date   = new Date(parseInt(obj.dateAdded)).toLocaleDateString(),
-      begin  = '<li data-date="' + date + '" ' + dad + '><a href="' + url + '">' + title + '</a>',
-      finish = '</li>';
+      title  = !!obj.title ? obj.title : 'no title';
 
-    res.push(begin);
+    res.push('<li ' + mark  + '><a class="ico" href="' + url + '">' + title + '</a>');
     this.walk(obj, res);
-    res.push(finish);
+    res.push('</li>');
   },
 
   handleArr: function(arr, res) {
-    res.push('<ul data-children="' + arr.length + '">');
+    if(arr.length < 1) return;
+    res.push('<ul>');
     this.walk(arr, res);
     res.push('</ul>');
   },
@@ -40,6 +37,10 @@ var  bmm = {
       }
     }, this);
     return res;
+  },
+
+  parseUrl : function(dateStr) {
+    return new Date(parseInt(dateStr, 10)).toLocaleDateString();
   },
 
   parseUrl : function(url) {
@@ -62,22 +63,21 @@ var  bmm = {
   },
 
   doSome: function() {
-    $('.dad > a').on('click', function(e) {
+    $('.bmdir > a').on('click', function(e) {
       e.preventDefault();
       e.target.dad().classList.toggle('show');
     })
 
-    $('.search').on('change', function(e) {
+    $('#search').on('change', function(e) {
       if(!e.target.value.trim()) return;
-      this.doSearch(e.target.value.trim(), _.find($('.search input'), 'checked'));
+      this.doSearch(e.target.value.trim(), _.find($('.search .btn-group input'), 'checked'));
     }.bind(this))
 
   },
 
-
-  showSearchResults: function(res) {
-    $(".search .results").html(this.walk(res, []).join(''));
-  },
+  // showSearchResults: function(res) {
+  //   $(".search .results").html(this.walk(res, []).join(''));
+  // },
 
   doSearch: function(inp, opt) {
     var
@@ -89,42 +89,4 @@ var  bmm = {
   }
 }
 
-
 bmm.init(db);
-
-// console.time('dump');
-// function walk(x, res) {
-//   _.each(x, function(v, k) {
-//     if(_.isObject(v)) {
-//       res.push(v.length ? '<ul>' : '<li>');
-//       walk(v, res);
-//       res.push(v.length ? '</ul>' : '</li>');
-//     } else {
-//       res.push('<p>' + k + ': ' + v + '</p>');
-//     }
-//   });
-//   return res;
-// }
-// $("#bookmarks").html(walk(db, []).join(''))
-// console.timeEnd('dump');
-
-// .replace(/^(\s+)(["\w]+):\s([^\{\[\}\]]+?),?$/gm, '$1<i>$2</i><b>$3</b>')
-//               .replace(/^(\s+)?"(\w+)":\s\[$/gm, '$1<ul data-key="$2">')
-//               .replace(/^(\s+)?\{/gm, '$1<li>')
-//               .replace(/^(\s+)?\},?$/gm, '$1</li>')
-
-
-// function rgxJson(tree) {
-//   var
-//     str = JSON.stringify(tree || db, null, 2),
-//     html = str.replace(/^(\s+)?(.*?)(\b|"),?$/gm, '$1<p>$2</p>')
-//               .replace(/^(\s+)?"(\w+)":\s\[$/gm, '$1<ul data-key="$2">')
-//               .replace(/^(\s+)?"(\w+)":\s\{$/gm, '$1<ol data-key="$2">')
-//               .replace(/^(\s+)?\{$/gm, '$1<li>')
-//               .replace(/^(\s+)?\[$/gm, '$1<ul>')
-//               .replace(/^(\s+)?\},?$/gm, '$1</ol>')
-//               .replace(/^(\s+)?\],?$/gm, '$1</ul>');
-//   $("#bookmarks").html(html);
-// }
-
-// rgxJson(tmp);

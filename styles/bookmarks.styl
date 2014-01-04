@@ -1,0 +1,48 @@
+#bookmarks
+  position relative
+  ul,li,a
+    vertical-align top
+    position relative
+  li ul
+    brd(0 -1px 0 0 brdClr)
+
+  li.bmdir
+    brd(-1px 0 0 brdClr)
+    transition max-height 0.5s
+    overflow hidden
+    max-height (step*2)
+
+  li.bmdir > a
+    brd(0 -1px 0 brdClr)
+    headGr()
+    padding 0 (step/2)
+    display block
+    lh()
+    &:before
+      content: '\e818'
+
+  li[data-children="0"] > a:before
+    content: '\e88c'
+
+  li[data-children] > ul
+    transition opacity 0.4s
+    padding 0 0 0 step
+    opacity: 0
+
+  li.bmdir.show
+    max-height 9999px
+    > ul
+      opacity: 1
+    > a
+      btnGrHov()
+      color selClr
+
+  li.bmark
+    padding (step/2)
+    border-bottom: 1px dashed #ccc
+    display: inline-block
+    width 25%
+    &:last-child
+      border none
+    a:before
+      content: '\e88b'

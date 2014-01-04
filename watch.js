@@ -7,13 +7,12 @@ var
 
 (function(dirs) {
   var watcher = {
-
-    styl: function (fl) {
-      return 'stylus -c ' + fl
+    jade: function (fl) {
+      return 'jade -P ' + fl + ' -o .';
     },
 
-    jade: function (fl) {
-      return 'jade -P ' + fl + ' -o .'
+    styl: function(fl) {
+      return 'stylus -c styles/main.styl -o css/';
     },
 
     cpDone: function (err, stdout, stderr) {

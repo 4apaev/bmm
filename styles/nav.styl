@@ -1,0 +1,37 @@
+// header
+//   headGr
+//   text-shadow 0 1px 0 #fff
+//   padding step
+
+.nav
+  display: inline-block
+  margin: 0 4px 4px 0
+  h4
+    margin: 0 0 4px
+
+.btn-group
+  word-spacing -3px
+  button, input
+    btn()
+    // &:nth-child(1)
+    &:first-of-type
+      radiusLeft()
+    &:last-of-type
+      radiusRight()
+
+input[type="text"]
+  background: #fff
+
+input[type="radio"]
+  size: (step*1.5)
+  &:checked
+    btnGrHov()
+    text-shadow 0 -1px 0 #fff
+
+// #search
+//   padding 0 (step/2)
+//   brd()
+//   lh(step*2)
+//   border-radius 5px
+//   width 100%
+//   border none

@@ -10,30 +10,25 @@ html
     script(src="js/min.js")
     script(src="js/temp.js")
   body
-    header
 
-      h4 sort by
-      nav
+    section.nav.sort.btn-group
+      h4 sort
+      button.ico.title title
+      button.ico.date date
+      button.ico.url url
+      button.ico.host host
+      button.ico.path path
+      button.ico.protocol protocol
 
-        button.ico.title title
-        button.ico.date date
-        button.ico.url url
-        button.ico.host host
-        button.ico.path path
-        button.ico.protocol protocol
-
-    div.search
+    section.nav.btn-group.search
       h4 search
-      nav
-        input(class='ico rgx-end', type="radio", name="rgx", value="end")
-        input(class='ico rgx-or', type="radio", name="rgx", value="or")
-        input(class='ico rgx-case', type="radio", name="rgx", value="ignore case")
-        input(class='ico rgx-whole', type="radio", name="rgx", value="whole word", checked )
-
+      input(class='ico rgx-end', type="radio", name="rgx", value="end")
+      input(class='ico rgx-or', type="radio", name="rgx", value="or")
+      input(class='ico rgx-case', type="radio", name="rgx", value="ignore case")
+      input(class='ico rgx-whole', type="radio", name="rgx", value="whole word", checked )
       input(id="search", type="text", placeholder="placeholder")
 
-      div.results
-
+    div.results
     div#bookmarks
 
     script(src='js/main.js')
