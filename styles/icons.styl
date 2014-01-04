@@ -20,28 +20,27 @@ $glyph
 .ico:before, [data-ico]:before
   @extend $glyph
 
-button.ico.title:before
+.title[name="sort"]:before
   content: "\e809"
-button.ico.date:before
+.date[name="sort"]:before
   content: "\e81d"
-button.ico.url:before
+.url[name="sort"]:before
   content: "\e80b"
-button.ico.host:before
+.host[name="sort"]:before
   content: "\e866"
-button.ico.path:before
+.path[name="sort"]:before
   content: "\e861"
-button.ico.protocol:before
+.protocol[name="sort"]:before
   content: "\e86a"
 
-.ico.rgx-end:before
+.end[name="rgx"]:before
   content: "\e851"
-.ico.rgx-or:before
-  content: "\e833"
-.ico.rgx-case:before
+.or[name="rgx"]:before
   content: "\e834"
-.ico.rgx-whole:before
+.case[name="rgx"]:before
+  content: "\e834"
+.whole[name="rgx"]:before
   content: "\e809"
 
-#search:before
-  @extend $glyph
+.ico.find:before
   content: "\e800"

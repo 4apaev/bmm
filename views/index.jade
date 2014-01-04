@@ -13,23 +13,28 @@ html
 
     section.nav.sort.btn-group
       h4 sort
-      button.ico.title title
-      button.ico.date date
-      button.ico.url url
-      button.ico.host host
-      button.ico.path path
-      button.ico.protocol protocol
+      //- button.ico.title title
+      //- button.ico.date date
+      //- button.ico.url url
+      //- button.ico.host host
+      //- button.ico.path path
+      //- button.ico.protocol protocol
+      input(type="radio", name="sort", class="ico date", value="date")
+      input(type="radio", name="sort", class="ico url", value="url")
+      input(type="radio", name="sort", class="ico host", value="host", "checked")
+      input(type="radio", name="sort", class="ico path", value="path")
+      input(type="radio", name="sort", class="ico protocol", value="protocol")
 
     section.nav.btn-group.search
       h4 search
-      input(class='ico rgx-end', type="radio", name="rgx", value="end")
-      input(class='ico rgx-or', type="radio", name="rgx", value="or")
-      input(class='ico rgx-case', type="radio", name="rgx", value="ignore case")
-      input(class='ico rgx-whole', type="radio", name="rgx", value="whole word", checked )
+      input(type="radio", name="rgx", class="ico end", value="end")
+      input(type="radio", name="rgx", class="ico or", value="or")
+      input(type="radio", name="rgx", class="ico whole", value="whole word", "checked" )
       input(id="search", type="text", placeholder="placeholder")
-
-    div.results
+      button.ico.find
+    hr
     div#bookmarks
+    div.results
 
     script(src='js/main.js')
 

@@ -1,5 +1,10 @@
-#bookmarks
+#bookmarks, .results
   position relative
+  display: inline-block
+  padding: step
+  max-width: 45%
+  box-sizing: border-box
+  vertical-align: top
   ul,li,a
     vertical-align top
     position relative
@@ -9,7 +14,6 @@
   li.bmdir
     brd(-1px 0 0 brdClr)
     transition max-height 0.5s
-    overflow hidden
     max-height (step*2)
 
   li.bmdir > a
@@ -25,7 +29,7 @@
     content: '\e88c'
 
   li[data-children] > ul
-    transition opacity 0.4s
+    transition opacity 0.6s
     padding 0 0 0 step
     opacity: 0
 

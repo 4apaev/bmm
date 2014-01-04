@@ -13,10 +13,9 @@
   word-spacing -3px
   button, input
     btn()
-    // &:nth-child(1)
     &:first-of-type
       radiusLeft()
-    &:last-of-type
+    &:last-child
       radiusRight()
 
 input[type="text"]
@@ -27,11 +26,3 @@ input[type="radio"]
   &:checked
     btnGrHov()
     text-shadow 0 -1px 0 #fff
-
-// #search
-//   padding 0 (step/2)
-//   brd()
-//   lh(step*2)
-//   border-radius 5px
-//   width 100%
-//   border none
