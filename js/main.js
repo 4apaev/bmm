@@ -15,7 +15,7 @@ var  bmm = {
   handleObj: function(obj, res) {
 
     var
-      dad    = !!obj.children ? 'class="dad"' : 'class="kid"',
+      dad    = !!obj.children ? 'class="dad"' : 'class="kid col"',
       url    = !!obj.url ? obj.url : '#',
       title  = !!obj.title ? obj.title : 'no title',
       date   = new Date(parseInt(obj.dateAdded)).toLocaleDateString(),
@@ -45,11 +45,11 @@ var  bmm = {
   parseUrl : function(url) {
     var matches = url.match(/(\w+):\/\/([\w.]+)\/(\S*)/);
     return !!matches ? {
-       fullurl  = matches[0]
-      ,protocol = matches[1]
-      ,host     = matches[2]
-      ,path     = matches[3]
-    }
+       fullurl  : matches[0]
+      ,protocol : matches[1]
+      ,host     : matches[2]
+      ,path     : matches[3]
+    } : 'no matches';
   },
 
   init : function(tree) {
@@ -67,13 +67,25 @@ var  bmm = {
       e.target.dad().classList.toggle('show');
     })
 
-    $('#search input').on('change', function(e) {
-      console.log(e.target.value);
-      var rgx = new RegExp(e.target.value, "gi");
-      var o = _.filter(this.dump, function(v,k) { return rgx.test(k)})
-      $("#bookmarks").html(this.walk(o, []).join(''));
+    $('.search').on('change', function(e) {
+      if(!e.target.value.trim()) return;
+      this.doSearch(e.target.value.trim(), _.find($('.search input'), 'checked'));
     }.bind(this))
-    // $0.css({'position':'absolute',left:$0.offsetLeft+'px',top:$0.offsetTop+'px',height:$0.offsetHeight*2+'px',width:$0.offsetWidth*2+'px'})
+
+  },
+
+
+  showSearchResults: function(res) {
+    $(".search .results").html(this.walk(res, []).join(''));
+  },
+
+  doSearch: function(inp, opt) {
+    var
+       rgx = new RegExp(inp, "gi")
+      ,out = _.filter(this.dump, function(v,k) { return rgx.test(k)});
+
+    console.log(inp, opt, out);
+
   }
 }
 
@@ -95,3 +107,24 @@ bmm.init(db);
 // }
 // $("#bookmarks").html(walk(db, []).join(''))
 // console.timeEnd('dump');
+
+// .replace(/^(\s+)(["\w]+):\s([^\{\[\}\]]+?),?$/gm, '$1<i>$2</i><b>$3</b>')
+//               .replace(/^(\s+)?"(\w+)":\s\[$/gm, '$1<ul data-key="$2">')
+//               .replace(/^(\s+)?\{/gm, '$1<li>')
+//               .replace(/^(\s+)?\},?$/gm, '$1</li>')
+
+
+// function rgxJson(tree) {
+//   var
+//     str = JSON.stringify(tree || db, null, 2),
+//     html = str.replace(/^(\s+)?(.*?)(\b|"),?$/gm, '$1<p>$2</p>')
+//               .replace(/^(\s+)?"(\w+)":\s\[$/gm, '$1<ul data-key="$2">')
+//               .replace(/^(\s+)?"(\w+)":\s\{$/gm, '$1<ol data-key="$2">')
+//               .replace(/^(\s+)?\{$/gm, '$1<li>')
+//               .replace(/^(\s+)?\[$/gm, '$1<ul>')
+//               .replace(/^(\s+)?\},?$/gm, '$1</ol>')
+//               .replace(/^(\s+)?\],?$/gm, '$1</ul>');
+//   $("#bookmarks").html(html);
+// }
+
+// rgxJson(tmp);

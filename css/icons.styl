@@ -1,0 +1,47 @@
+iconFont(path, fnt)
+  @font-face
+    font-family: fnt
+    src: url(path + '/' + fnt + '.eot')
+    src: local('☺'), url(path + '/' + fnt + '.ttf') format('truetype'), url(path + '/' + fnt + '.svg#' + fnt) format('svg')
+    font-weight: normal
+    font-style: normal
+
+iconFont('font', 'fontello')
+
+$glyph
+  font-family: "fontello"
+  display: inline-block
+  text-decoration: none
+  margin-right: 4px
+  size: 16px
+  font-weight: normal
+  font-style: normal
+
+.ico:before, [data-ico]:before
+  @extend $glyph
+
+button.ico.title:before
+  content: "\e809"
+button.ico.date:before
+  content: "\e81d"
+button.ico.url:before
+  content: "\e80b"
+button.ico.host:before
+  content: "\e866"
+button.ico.path:before
+  content: "\e861"
+button.ico.protocol:before
+  content: "\e86a"
+
+.ico.rgx-end:before
+  content: "\e851"
+.ico.rgx-or:before
+  content: "\e833"
+.ico.rgx-case:before
+  content: "\e834"
+.ico.rgx-whole:before
+  content: "\e809"
+
+#search:before
+  @extend $glyph
+  content: "\e800"

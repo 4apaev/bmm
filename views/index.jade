@@ -11,15 +11,31 @@ html
     script(src="js/temp.js")
   body
     header
-      - var props  = ['title','parentId','dateAdded','hash','hostname','origin','pathname','protocol','search']
+
       h4 sort by
       nav
-        each val, key in props
-          button(id=val) #{val}
 
-    label#search search
-      input(type="text", placeholder="placeholder")
+        button.ico.title title
+        button.ico.date date
+        button.ico.url url
+        button.ico.host host
+        button.ico.path path
+        button.ico.protocol protocol
+
+    div.search
+      h4 search
+      nav
+        input(class='ico rgx-end', type="radio", name="rgx", value="end")
+        input(class='ico rgx-or', type="radio", name="rgx", value="or")
+        input(class='ico rgx-case', type="radio", name="rgx", value="ignore case")
+        input(class='ico rgx-whole', type="radio", name="rgx", value="whole word", checked )
+
+      input(id="search", type="text", placeholder="placeholder")
+
+      div.results
 
     div#bookmarks
 
     script(src='js/main.js')
+
+
