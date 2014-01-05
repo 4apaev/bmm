@@ -18,7 +18,6 @@ define('modules/Search', [], function () {
       return res;
     },
 
-
     parseDate : function(dateStr) {
       return new Date(parseInt(dateStr, 10)).toLocaleDateString();
     },
@@ -43,14 +42,6 @@ define('modules/Search', [], function () {
     getRegex: function(str) {
       var escaped = str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
       return new RegExp(escaped, "gi");
-      // var opt = {
-      //   "or" : function(inp) {
-      //     return '(' + inp.replace(/\s+/g, '|') + ')';
-      //   },
-      //   "whole" : function(inp) {
-      //     return '\b(' + inp.replace(/\s+/g, '|') + ')\b';
-      //   },
-      // }
     },
 
     filterByRgx: function(str) {
@@ -65,6 +56,14 @@ define('modules/Search', [], function () {
         title:key,
         children: group
       }
+    },
+
+    format: function(key, group) {
+      var res = group ? _.groupBy(this.index, this.getSerachMethod(key), this) : _.sortBy(this.index, this.getSerachMethod(key), this);
+      return group ? _.sortBy(_.map(res, this.formatResults), function(node){
+        return node.children.length;
+      }) : res;
+
     },
 
     doSearch: function(str, sortKey, opt) {

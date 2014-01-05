@@ -7,49 +7,58 @@ define('modules/Bmm', [], function () {
 
   Bmm.prototype = {
 
-    handleObj: function(obj, res) {
-      var
-        kids   = !!obj.children ? obj.children.length : 0
-        mark   = !!kids ? 'class="bmdir" data-children="' + kids + '"' : 'class="bmark"',
-        url    = !!obj.url ? obj.url : '#',
-        title  = !!obj.title ? obj.title : 'no title';
+    getNodeHtml: function(node) {
 
-      res.push('<li ' + mark  + '><a class="ico" href="' + url + '">' + title + (!!kids ? ' - ' + kids : '') + '</a>');
-      this.walk(obj, res);
-      res.push('</li>');
+      var  url   = node.url || '#'
+          ,klass = 'ico'
+          ,title = node.title || "no title"
+          ,data  = 'data-dir="' + node.parentId + '-' + node.id + '"';
+
+      if(node.children) {
+        klass += ' toggle';
+        title += " - " + node.children.length;
+        data  += ' data-children="' + node.children.length + '"';
+      }
+
+      return '<li ' + data + '><a class="' + klass + '" href="' + url + '">' + title + '</a>';
     },
 
-    handleArr: function(arr, res) {
-      if(arr.length === 0) return;
-      res.push('<ul>');
-      this.walk(arr, res);
-      res.push('</ul>');
+    isBadNode: function(node) {
+      return (typeof node !== 'object' || (node.length && node.length < 1))
     },
 
     walk : function(x, res) {
-      _.each(x, function(v, k) {
-        if(_.isObject(v)) {
-          this[_.isPlainObject(v) ? 'handleObj' : 'handleArr'](v, res);
-        }
+      _.each(x, function(node) {
+
+        if(this.isBadNode(node)) return;
+
+        var htm = node.length ? ['<ul>', '</ul>'] : [this.getNodeHtml(node), '</li>'];
+
+        res.push(htm[0]);
+        this.walk(node, res);
+        res.push(htm[1]);
+
       }, this);
+
       return res;
     },
 
-    init : function() {
-      $("#bookmarks").html(this.walk(this.dump, []).join(''));
-      $('.bmdir > a').on('click', this.toggleize);
+    init : function(tree) {
+      $("#bookmarks").html(this.walk(tree || this.dump, []).join(''));
+      $('li[data-children] > a').on('click', this.toggleize);
       $('.find').on('click', this.doFind.bind(this));
     },
 
     showSearchResults: function(res) {
       $(".results").html('<ul>' + this.walk(res, []).join('') + '</ul>');
-      $('.results .bmdir > a').on('click', this.toggleize);
+      $('.results li[data-children] > a').on('click', this.toggleize);
     },
 
     toggleize: function(e) {
       e.preventDefault();
       e.target.dad().classList.toggle('show');
     },
+
 
 
     doFind: function() {
