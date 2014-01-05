@@ -1,0 +1,17 @@
+{
+   "app": {
+      "launch": {
+         "local_path": "index.html"
+      }
+   },
+   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+   "description": "gives you an easy way to manage bookmarks",
+   "icons": {
+      "128": "images/icon_128.png",
+      "16": "images/icon_16.png"
+   },
+   "manifest_version": 2,
+   "name": "bmm",
+   "permissions": [ "bookmarks", "storage" ],
+   "version": "0.1"
+}

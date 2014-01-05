@@ -1,6 +1,4 @@
-var log = console.log.bind(console);
 var  bmm = {
-
   flattenTree : function(x, res, path) {
     if(x.children) {
       _.each(x.children, function(v, k) {
@@ -25,7 +23,7 @@ var  bmm = {
   },
 
   handleArr: function(arr, res) {
-    if(arr.length < 1) return;
+    if(arr.length === 0) return;
     res.push('<ul>');
     this.walk(arr, res);
     res.push('</ul>');
@@ -67,6 +65,7 @@ var  bmm = {
 
   showSearchResults: function(res) {
     $(".results").html('<ul>' + this.walk(res, []).join('') + '</ul>');
+
     $('.results .bmdir > a').on('click', function(e) {
       e.preventDefault();
       e.target.dad().classList.toggle('show');
@@ -95,9 +94,10 @@ var  bmm = {
       ,res = _.chain(this.dump)
               .filter(function(node, path) { return rgx.test(path)})
               .groupBy(this.getSerachMethod(sortKey), this)
-              .map(function( group, key ) { return group.length > 1 ? { title:key, children: group } : group[0] })
+              // .map(function( group, key ) { return group.length > 1 ? { title:key, children: group } : group[0] })
+              .map(function( group, key ) { return { title:key, children: group }})
 
-    this.showSearchResults(res);
+    this.showSearchResults(res, rgx);
   }
 }
 
