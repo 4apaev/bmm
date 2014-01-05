@@ -1,24 +1,18 @@
 doctype html
 html
   head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport" content="width=device-width")
-    meta(name='description', content='audio lib')
-    link(rel='stylesheet', href='css/main.css')
-    script(src="js/lodash.min.js")
-    script(src="js/min.js")
-    script(src="js/temp.js")
+    meta(name="description", content="Bookmark Manager")
+    title Bookmark Manager
+    link(rel="stylesheet", href="css/main.css")
+    //- script(src="js/lodash.min.js")
+    //- script(src="js/min.js")
   body
 
     section.nav.sort.btn-group
       h4 sort
-      //- button.ico.title title
-      //- button.ico.date date
-      //- button.ico.url url
-      //- button.ico.host host
-      //- button.ico.path path
-      //- button.ico.protocol protocol
       input(type="radio", name="sort", class="ico date", value="date")
       input(type="radio", name="sort", class="ico url", value="url")
       input(type="radio", name="sort", class="ico host", value="host", "checked")
@@ -36,6 +30,9 @@ html
     div#bookmarks
     div.results
 
-    script(src='js/main.js')
+    script(data-main="js/main", src="js/lib/require.js")
+    //- script(src="js/main.js")
+    //- script(src="js/search.js")
+    //- script(src="js/app.js")
 
 
