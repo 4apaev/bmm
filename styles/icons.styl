@@ -17,9 +17,10 @@ $glyph
   font-weight: normal
   font-style: normal
 
-.ico:before, [data-ico]:before
+.ico:before
   @extend $glyph
 
+// sort options
 .title[name="sort"]:before
   content: "\e809"
 .date[name="sort"]:before
@@ -33,6 +34,7 @@ $glyph
 .protocol[name="sort"]:before
   content: "\e86a"
 
+// regex options
 .end[name="rgx"]:before
   content: "\e851"
 .or[name="rgx"]:before
@@ -44,3 +46,14 @@ $glyph
 
 .ico.find:before
   content: "\e800"
+
+// folders
+
+a.ico:not(.toggle):before
+  content: '\e88b'
+a.ico.toggle:before
+  content: '\e893'
+  [data-children="0"] > &
+    content: '\e88c'
+  .show > &
+    content: '\e894'
