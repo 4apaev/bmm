@@ -6,20 +6,16 @@ define('modules/Bmm', [], function () {
   }
 
   Bmm.prototype = {
-
     getNodeHtml: function(node) {
-
       var  url   = node.url || '#'
           ,klass = 'ico'
           ,title = node.title || "no title"
           ,data  = 'data-dir="' + node.parentId + '-' + node.id + '"';
-
       if(node.children) {
         klass += ' toggle';
         title += " - " + node.children.length;
         data  += ' data-children="' + node.children.length + '"';
       }
-
       return '<li ' + data + '><a class="' + klass + '" href="' + url + '">' + title + '</a>';
     },
 
@@ -29,17 +25,12 @@ define('modules/Bmm', [], function () {
 
     walk : function(x, res) {
       _.each(x, function(node) {
-
         if(this.isBadNode(node)) return;
-
         var htm = node.length ? ['<ul>', '</ul>'] : [this.getNodeHtml(node), '</li>'];
-
         res.push(htm[0]);
         this.walk(node, res);
         res.push(htm[1]);
-
       }, this);
-
       return res;
     },
 
@@ -50,13 +41,20 @@ define('modules/Bmm', [], function () {
     },
 
     showSearchResults: function(res) {
-      $(".results").html('<ul>' + this.walk(res, []).join('') + '</ul>');
-      $('.results li[data-children] > a').on('click', this.toggleize);
+      $("#results").html('<ul>' + this.walk(res, []).join('') + '</ul>');
+      $('#results li[data-children] > a').on('click', this.toggleize);
+      $('#results li:not([data-children])').on('dblclick', this.editNode);
     },
 
     toggleize: function(e) {
       e.preventDefault();
       e.target.dad().classList.toggle('show');
+    },
+
+    editNode: function(e) {
+      var tools = $('#tools');
+      tools.style.top = e.x + 'px';
+      tools.style.left = e.y + 'px';
     },
 
 

@@ -31,6 +31,7 @@ define('modules/Search', [], function () {
         ,path     : matches[3]
       } : 'no matches';
     },
+
     getSerachMethod: function(key) {
       return (key === 'date') ? function(node) {
         return this.parseDate(node.dateAdded);
@@ -39,39 +40,42 @@ define('modules/Search', [], function () {
       }
     },
 
-    getRegex: function(str) {
+    getRegex: function(str, flag) {
       var escaped = str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-      return new RegExp(escaped, "gi");
+      return new RegExp(escaped.split(' ').join(flag === 'or' ? '|' : '.*'), "gi");
     },
 
-    filterByRgx: function(str) {
-      var rgx = this.getRegex(str);
+    filterByRgx: function(rgx) {
       return _.filter(this.index, function(node, path) {
         return rgx.test(path) || rgx.test(node.url);
       });
     },
 
     formatResults: function(group, key) {
-      return {
-        title:key,
-        children: group
-      }
+      return (group.length !== 1) ? { title:key, children: group } : group[0];
     },
 
-    format: function(key, group) {
-      var res = group ? _.groupBy(this.index, this.getSerachMethod(key), this) : _.sortBy(this.index, this.getSerachMethod(key), this);
-      return group ? _.sortBy(_.map(res, this.formatResults), function(node){
-        return node.children.length;
-      }) : res;
+    format: function(arr, key, group) {
+      var
+        index = arr || this.index,
+        method = this.getSerachMethod(key);
 
+      if(!group) return _.sortBy(index, method, this);
+
+      return _.chain(index)
+              .groupBy(method, this)
+              .map(this.formatResults)
+              .sortBy(function(node){
+                return node.children ? node.children.length : 0;
+              })
+              .reverse();
     },
 
-    doSearch: function(str, sortKey, opt) {
-      var results  = this.filterByRgx(str);
-      var grouped  = _.groupBy(results, this.getSerachMethod(sortKey), this);
-      var formated = _.map(grouped, this.formatResults);
-
-      return formated;
+    doSearch: function(str, sortKey, flag) {
+      var
+        rgx = this.getRegex(str, flag),
+        results  = this.filterByRgx(rgx);
+      return this.format(results, sortKey, 1);
     }
   }
   return Search;

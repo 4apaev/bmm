@@ -20,13 +20,17 @@ html
       section.nav.btn-group.search
         h4 search
         input(type="radio", name="rgx", class="ico end", value="end")
-        input(type="radio", name="rgx", class="ico or", value="or")
-        input(type="radio", name="rgx", class="ico whole", value="whole word", "checked" )
+        input(type="radio", name="rgx", class="ico or", value="or", "checked")
         input(id="search", type="text", placeholder="placeholder")
         button.ico.find
 
+
     div#bookmarks
     div#results
+
+    section#tools.btn-group
+      button(class="ico remove") remove
+      button(class="ico edit") edit
 
     script(data-main="js/main", src="js/lib/require.js")
 
