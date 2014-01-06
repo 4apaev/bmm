@@ -7,13 +7,37 @@ nibdir = '../node_modules/nib'
 @import 'icons'
 
 html, body
-  min-width 600px
   height 100%
+
 body
   color txtClr
-  padding step
+  background: #f0f0f0
   font normal 13px/step Helvetica, arial, freesans, clean, sans-serif
+
+sidebarWidth = (step*16)
+
+
+#bookmarks, #results, header
+  padding step
+
+#bookmarks
+  width sidebarWidth
+  box-shadow 1px 0 0 #ccc, 2px 0 0 #fff
+  fixed(top left)
+  bottom: 0
+  overflow-x: hidden
+  overflow-y: auto
+
+#results
+  margin-left sidebarWidth
+
+header
+  margin-left sidebarWidth
+  box-shadow 0 1px 0 #ccc, 0 2px 0 #fff
+
+
+
 
 
 @import 'nav'
-@import 'bookmarks'
+@import 'bookmarks-2'

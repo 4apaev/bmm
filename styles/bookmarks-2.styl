@@ -1,0 +1,33 @@
+#bookmarks, #results
+  font-size: 12px
+  box-sizing: border-box
+  vertical-align: top
+
+  ul,li,a
+    vertical-align top
+    position relative
+    ellipsis()
+
+  li[data-children]
+    transition max-height 0.25s
+    max-height (step*1.5)
+    > ul
+      transition opacity 0.35s
+      padding 0 0 0 step
+      opacity: 0
+    > a
+      display block
+      color actClr
+      font-size 13px
+      lh(step*1.5)
+
+  li.show[data-children]
+    max-height 9999px
+    > ul
+      opacity: 1
+    > a
+      color selClr
+
+  li:not([data-children])
+    padding (step/4)
+    box-shadow 0 1px 0 #ddd, 0 2px 0 #fff

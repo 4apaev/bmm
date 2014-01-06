@@ -7,32 +7,27 @@ html
     meta(name="description", content="Bookmark Manager")
     title Bookmark Manager
     link(rel="stylesheet", href="css/main.css")
-    //- script(src="js/lodash.min.js")
-    //- script(src="js/min.js")
+
   body
+    header
+      section.nav.sort.btn-group
+        h4 sort
+        input(type="radio", name="sort", class="ico date", value="date")
+        input(type="radio", name="sort", class="ico url", value="url")
+        input(type="radio", name="sort", class="ico host", value="host", "checked")
+        input(type="radio", name="sort", class="ico path", value="path")
+        input(type="radio", name="sort", class="ico protocol", value="protocol")
+      section.nav.btn-group.search
+        h4 search
+        input(type="radio", name="rgx", class="ico end", value="end")
+        input(type="radio", name="rgx", class="ico or", value="or")
+        input(type="radio", name="rgx", class="ico whole", value="whole word", "checked" )
+        input(id="search", type="text", placeholder="placeholder")
+        button.ico.find
 
-    section.nav.sort.btn-group
-      h4 sort
-      input(type="radio", name="sort", class="ico date", value="date")
-      input(type="radio", name="sort", class="ico url", value="url")
-      input(type="radio", name="sort", class="ico host", value="host", "checked")
-      input(type="radio", name="sort", class="ico path", value="path")
-      input(type="radio", name="sort", class="ico protocol", value="protocol")
-
-    section.nav.btn-group.search
-      h4 search
-      input(type="radio", name="rgx", class="ico end", value="end")
-      input(type="radio", name="rgx", class="ico or", value="or")
-      input(type="radio", name="rgx", class="ico whole", value="whole word", "checked" )
-      input(id="search", type="text", placeholder="placeholder")
-      button.ico.find
-    hr
     div#bookmarks
-    div.results
+    div#results
 
     script(data-main="js/main", src="js/lib/require.js")
-    //- script(src="js/main.js")
-    //- script(src="js/search.js")
-    //- script(src="js/app.js")
 
 
