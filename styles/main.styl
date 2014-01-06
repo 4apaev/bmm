@@ -14,31 +14,55 @@ body
   background: #f0f0f0
   font normal 13px/step Helvetica, arial, freesans, clean, sans-serif
 
-sidebarWidth = (step*16)
+sidebarWidth = (step*24)
 
 
-#bookmarks, #results, header
+#bookmarks, #results
   padding step
 
 #bookmarks
   width sidebarWidth
-  box-shadow 1px 0 0 #ccc, 2px 0 0 #fff
+  box-shadow 1px 0 0 #bbb, 2px 0 0 #fff
   fixed(top left)
   bottom: 0
-  overflow-x: hidden
-  overflow-y: auto
+  scrollY()
 
 #results
-  margin-left sidebarWidth
+  position: fixed
+  top: (step*5)
+  left: sidebarWidth
+  bottom: 0
+  right: 0
+  scrollY()
 
 header
   margin-left sidebarWidth
-  box-shadow 0 1px 0 #ccc, 0 2px 0 #fff
+  box-shadow 0 1px 0 #bbb, 0 2px 0 #fff
 
 #tools
+  transition opacity 0.35s
+  opacity: 0
+  pointer-events none
   position: fixed
+  top: 35%
+  left: 50%
+  width: (step*32)
+  margin-left: -(@width / 2)
   box-shadow 0 1px 3px rgba(0,0,0,0.5)
   z-index: 999
+  background #fff
+  padding step
+  rd()
+  &:before
+    position: fixed
+    size: 100%
+    background rgba(0,0,0,0.5)
+
+
+#tools.show
+  opacity: 1
+  pointer-events all
+
 
 @import 'nav'
 @import 'bookmarks-2'

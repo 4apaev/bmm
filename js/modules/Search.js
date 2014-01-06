@@ -33,6 +33,25 @@ define('modules/Search', [], function () {
     },
 
     getSerachMethod: function(key) {
+      // /(date|parentId)/.test(key)
+
+
+      // var self = this;
+
+      // actions = {
+      //   date: function(node) {
+      //     return self.parseDate(node.dateAdded);
+      //   },
+      //   parentId: function(node) {
+      //     return self.parseDate(node.parentId);
+      //   }
+      //   fullurl : function(node) {return self.parseUrl(node.url)[key]}
+      //   protocol : function(node) {return self.parseUrl(node.url)[key]}
+      //   host : function(node) {return self.parseUrl(node.url)[key]}
+      //   path : function(node) {return self.parseUrl(node.url)[key]}
+      // }
+
+
       return (key === 'date') ? function(node) {
         return this.parseDate(node.dateAdded);
       } : function(node) {
@@ -67,8 +86,7 @@ define('modules/Search', [], function () {
               .map(this.formatResults)
               .sortBy(function(node){
                 return node.children ? node.children.length : 0;
-              })
-              .reverse();
+              }).__wrapped__;
     },
 
     doSearch: function(str, sortKey, flag) {

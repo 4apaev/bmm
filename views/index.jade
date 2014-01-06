@@ -10,27 +10,58 @@ html
 
   body
     header
-      section.nav.sort.btn-group
-        h4 sort
-        input(type="radio", name="sort", class="ico date", value="date")
-        input(type="radio", name="sort", class="ico url", value="url")
-        input(type="radio", name="sort", class="ico host", value="host", "checked")
-        input(type="radio", name="sort", class="ico path", value="path")
-        input(type="radio", name="sort", class="ico protocol", value="protocol")
-      section.nav.btn-group.search
-        h4 search
-        input(type="radio", name="rgx", class="ico end", value="end")
-        input(type="radio", name="rgx", class="ico or", value="or", "checked")
-        input(id="search", type="text", placeholder="placeholder")
-        button.ico.find
+
+      section.ico.nav.search
+        label search
+        div.btn-group
+          input(type="radio", name="rgx", class="ico end", value="end")
+          input(type="radio", name="rgx", class="ico or", value="or", "checked")
+          input(id="search", type="text", placeholder="placeholder")
+          button.ico.find
+      section.ico.nav.filter
+        label filter
+        div.btn-group
+          input(type="radio", name="filter", class="ico date", value="date")
+          input(type="radio", name="filter", class="ico url", value="url")
+          input(type="radio", name="filter", class="ico host", value="host", "checked")
+          input(type="radio", name="filter", class="ico path", value="path")
+          input(type="radio", name="filter", class="ico protocol", value="protocol")
+
+
+      search.ico.nav.sort
+        label sort
+        div.btn-group
+          button(class="ico up")
+          button(class="ico down")
 
 
     div#bookmarks
     div#results
+      //- section#tools
+      //- h3 edit node
 
-    section#tools.btn-group
-      button(class="ico remove") remove
-      button(class="ico edit") edit
+      //- div.btn-group
+      //-   button(class="ico edit") edit
+      //-   input(class="ico title", type="text")
+      //-   button(class="ico remove") remove
+      //- div.btn-group
+      //-   button(class="ico edit") edit
+      //-   input(class="ico url", type="text")
+      //-   button(class="ico remove") remove
+
+
+    //- section#tools
+    //-   h3 edit node
+
+    //-   div.btn-group
+    //-     button(class="ico edit") edit
+    //-     input(class="ico title", type="text")
+    //-     button(class="ico remove") remove
+    //-   div.btn-group
+    //-     button(class="ico edit") edit
+    //-     input(class="ico url", type="text")
+    //-     button(class="ico remove") remove
+
 
     script(data-main="js/main", src="js/lib/require.js")
 

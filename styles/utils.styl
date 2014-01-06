@@ -2,24 +2,25 @@ step = 16px
 txtClr = #333
 midClr = #ddd
 brdClr = #ccc
-hovClr = steelblue
-actClr = #555
-selClr = #555
+hovClr = lightsteelblue
+actClr = darkslateblue
+selClr = steelblue
 
 gradient1 = #fff
 gradient2 = #ddd
 
 bgClr = #eee
 btnClr = slategrey
+btnClr = slategrey
 a
   color #777
 
 headGr()
   background #fff linear-gradient(#f9f9f9, #f3f3f3) repeat-x
-btnGr()
-  background #fff linear-gradient(#fff, #eee) repeat-x
-btnGrHov()
-  background #ddd linear-gradient(#ddd, #eee) repeat-x
+btnGr(clr = #fff)
+  background clr linear-gradient(clr, darken(clr, 10)) repeat-x
+btnGrHov(clr = #fff)
+  background darken(clr, 10) linear-gradient(darken(clr, 10), clr) repeat-x
 
 lh(h = (step*2))
   line-height h
@@ -29,23 +30,32 @@ brd()
     box-shadow arguments
   else
     box-shadow 0 0 0 1px #ccc
-
 btn()
   display inline-block
   position relative
   padding 0 (step/2)
   margin 0
   border none
-  btnGr()
+  if length(arguments) == 1
+    background arguments[0]
+  else
+    btnGr()
   brd()
-  line-height: (step*1.5)
+  lh(step*1.5)
   color btnClr
   text-shadow 0 1px 0 #fff
   -webkit-appearance button
-  &:focus
-    btnGrHov()
-    text-shadow 0 -1px 0 #fff
 
+scrollY()
+  overflow-x: hidden
+  overflow-y: auto
+
+scrollX()
+  overflow-y: hidden
+  overflow-x: auto
+
+rd(n = 3px)
+  border-radius n
 radiusTop(n = 3px)
   border-radius n n 0 0
 

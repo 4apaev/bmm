@@ -39,25 +39,23 @@ $ = (function(document, window, $) {
     return this;
   };
 
-  node.css = function(stl) {
+  // node.css = function(stl) {
 
-    stl = stl || []['slice'].call(this.style);
+  //   stl = stl || []['slice'].call(this.style);
+  //   var type = stl.constructor.name;
+  //   if (type === 'String') return this.style[stl];
+  //   if (type === 'Array') {
+  //     return []['slice'].call(this.style).map(function(val, i) {
+  //       var obj = {};
+  //       obj[val] = this.style[val];
+  //       return obj;
+  //     }.bind(this))
+  //   }
 
-    if (stl.constructor.name === 'String') return this.style[stl];
-    if (stl.constructor.name === 'Array') {
-      return []['slice'].call(this.style).map(function(val, i) {
-        var obj = {};
-        obj[val] = this.style[val];
-        return obj;
-      }.bind(this))
-    }
+  //   stl.forEach(function(val, key) { this.style[key] = val}.bind(this);
 
-    _.each(stl, function(val, key) {
-      this.style[key] = val;
-    }, this);
-
-    return this;
-  };
+  //   return this;
+  // };
 
   window.on = node.on = function(event, fn) {
     this.addEventListener(event, fn, false);

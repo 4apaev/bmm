@@ -5,24 +5,35 @@
 
 .nav
   display: inline-block
-  margin: 0 4px 4px 0
-  h4
-    margin: 0 0 4px
-
+  padding step
+  box-shadow: 1px 0 0 #fff, 2px 0 0 #ccc;
+  label
+    display: inline-block
+    padding-right (step/4)
 .btn-group
+  display: inline-block
   word-spacing -3px
-  button, input
+  vertical-align: middle
+
+  button, input, a
     btn()
-    &:first-of-type
+    &:first-child
       radiusLeft()
     &:last-child
       radiusRight()
 
 input[type="text"]
   background: #fff
+  min-width (step*24)
 
 input[type="radio"]
   size: (step*1.5)
   &:checked
+    btnGrHov()
+    text-shadow 0 -1px 0 #fff
+
+
+button, [type="checkbox"], [type="radio"]
+  &:focus
     btnGrHov()
     text-shadow 0 -1px 0 #fff

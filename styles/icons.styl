@@ -19,29 +19,39 @@ $glyph
 .ico:before
   @extend $glyph
 
-// sort options
-.title[name="sort"]:before
-  content: "\e809"
-.date[name="sort"]:before
-  content: "\e81d"
-.url[name="sort"]:before
-  content: "\e80b"
-.host[name="sort"]:before
-  content: "\e866"
-.path[name="sort"]:before
-  content: "\e861"
-.protocol[name="sort"]:before
-  content: "\e86a"
 
-// regex options
-.end[name="rgx"]:before
-  content: "\e851"
-.or[name="rgx"]:before
-  content: "\e834"
-.case[name="rgx"]:before
-  content: "\e834"
-.whole[name="rgx"]:before
-  content: "\e809"
+.ico.sort
+  &:before
+    content "\e836"
+  .ico.up:before
+    content "\e824"
+  .ico.down:before
+    content "\e827"
+
+.ico.filter
+  &:before
+    content "\e889"
+  .title:before
+    content: "\e809"
+  .date:before
+    content: "\e81d"
+  .url:before
+    content: "\e80b"
+  .host:before
+    content: "\e866"
+  .path:before
+    content: "\e861"
+  .protocol:before
+    content: "\e86a"
+
+
+.ico.search
+  &:before
+    content "\e801"
+  .end:before
+    content: "\e851"
+  .or:before
+    content: "\e834"
 
 .ico.find:before
   content: "\e800"
@@ -50,14 +60,21 @@ $glyph
   content: "\e873"
 .ico.edit:before
   content: "\e80c"
+.ico.save:before
+  content: "\e844"
+
+
 
 // folders
 
-a.ico:not(.toggle):before
+b.ico:not(.toggle):before
   content: '\e806'
-a.ico.toggle:before
+b.ico.toggle:before
   content: '\e893'
   [data-children="0"] > &
     content: '\e813'
   .show > &
     content: '\e894'
+
+.ico.link:before
+  content: "\e804"

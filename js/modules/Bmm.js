@@ -7,8 +7,7 @@ define('modules/Bmm', [], function () {
 
   Bmm.prototype = {
     getNodeHtml: function(node) {
-      var  url   = node.url || '#'
-          ,klass = 'ico'
+      var  klass = 'ico'
           ,title = node.title || "no title"
           ,data  = 'data-dir="' + node.parentId + '-' + node.id + '"';
       if(node.children) {
@@ -16,7 +15,7 @@ define('modules/Bmm', [], function () {
         title += " - " + node.children.length;
         data  += ' data-children="' + node.children.length + '"';
       }
-      return '<li ' + data + '><a class="' + klass + '" href="' + url + '">' + title + '</a>';
+      return '<li ' + data + '><b class="' + klass + '" >' + title + '</b>' + (node.url ? '<q class="ico link">' + node.url + '</q>' : '' );
     },
 
     isBadNode: function(node) {
@@ -35,15 +34,19 @@ define('modules/Bmm', [], function () {
     },
 
     init : function(tree) {
-      $("#bookmarks").html(this.walk(tree || this.dump, []).join(''));
-      $('li[data-children] > a').on('click', this.toggleize);
+      $("#bookmarks").addhtml(this.walk(tree || this.dump, []).join(''));
+
+      $('li[data-children] > b').on('click', this.toggleize);
       $('.find').on('click', this.doFind.bind(this));
+      $('.find').on('change', this.doFind.bind(this));
+      this.showSearchResults(this.search.format(0, 'host', 1))
     },
 
     showSearchResults: function(res) {
+      this.lastSearch = res;
       $("#results").html('<ul>' + this.walk(res, []).join('') + '</ul>');
-      $('#results li[data-children] > a').on('click', this.toggleize);
-      $('#results li:not([data-children])').on('dblclick', this.editNode);
+      $('#results li[data-children] > b').on('click', this.toggleize);
+      $('#results li').on('dblclick', this.editNode);
     },
 
     toggleize: function(e) {
@@ -52,17 +55,17 @@ define('modules/Bmm', [], function () {
     },
 
     editNode: function(e) {
-      var tools = $('#tools');
-      tools.style.top = e.x + 'px';
-      tools.style.left = e.y + 'px';
+      e.target.contentEditable = true
+      var btn = $.do('button');
+      btn.classList.add('ico', 'save');
+      e.target.appendChild(btn);
     },
 
-
-
     doFind: function() {
+      console.log('obj');
       var val = $('#search').value.trim();
       if(!val) return;
-      var sort = _.find($('.sort input[name="sort"]'), 'checked').value,
+      var sort = _.find($('.filter input[name="filter"]'), 'checked').value,
           rgx  = _.find($('.search input[name="rgx"]'), 'checked').value;
       this.showSearchResults(this.search.doSearch(val, sort, rgx));
     }
