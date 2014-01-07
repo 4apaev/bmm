@@ -34,24 +34,28 @@ define('modules/Bmm', [], function () {
     },
 
     init : function(tree) {
+      console.time('dump');
       $("#bookmarks").addhtml(this.walk(tree || this.dump, []).join(''));
-
-      $('li[data-children] > b').on('click', this.toggleize);
-      $('.find').on('click', this.doFind.bind(this));
-      $('.find').on('change', this.doFind.bind(this));
-      this.showSearchResults(this.search.format(0, 'host', 1))
+      console.timeEnd('dump');
+      this.updateEventHandlers('all');
+      this.lastSearch = this.search.format(0, 'host', 1);
+      this.showSearchResults()
     },
 
     showSearchResults: function(res) {
-      this.lastSearch = res;
+      res = res || this.lastSearch
       $("#results").html('<ul>' + this.walk(res, []).join('') + '</ul>');
-      $('#results li[data-children] > b').on('click', this.toggleize);
-      $('#results li').on('dblclick', this.editNode);
+      this.updateEventHandlers();
     },
 
-    toggleize: function(e) {
-      e.preventDefault();
-      e.target.dad().classList.toggle('show');
+    updateEventHandlers: function(all) {
+      var selector = all ? '.bmm ' : '#results ';
+      $(selector + 'li[data-children] > b').on('click', function(e) {e.target.dad().classList.toggle('show')});
+      $(selector + 'li').on('dblclick', this.editNode.bind(this));
+      if(!all) return
+      $('.find').on('change', this.doFind.bind(this));
+      $('.find').on('click', this.doFind.bind(this));
+      $('.sort').on('click', this.reverseList.bind(this));
     },
 
     editNode: function(e) {
@@ -61,13 +65,23 @@ define('modules/Bmm', [], function () {
       e.target.appendChild(btn);
     },
 
+    reverseList: function(e) {
+      this.showSearchResults(this.lastSearch.reverse());
+    },
+
+    getFilterKey: function(type) {
+      return _.find($('.' + type + ' input'), 'checked').value
+    },
+
     doFind: function() {
       console.log('obj');
       var val = $('#search').value.trim();
       if(!val) return;
-      var sort = _.find($('.filter input[name="filter"]'), 'checked').value,
-          rgx  = _.find($('.search input[name="rgx"]'), 'checked').value;
-      this.showSearchResults(this.search.doSearch(val, sort, rgx));
+      var sort = this.getFilterKey('filter'),
+          rgx  = 'or';
+
+      this.lastSearch = this.search.doSearch(val, sort, rgx);
+      this.showSearchResults(this.lastSearch.reverse());
     }
   }
   return Bmm;

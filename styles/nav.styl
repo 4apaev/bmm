@@ -4,12 +4,15 @@
 //   padding step
 
 .nav
+  position: relative
   display: inline-block
   padding step
   box-shadow: 1px 0 0 #fff, 2px 0 0 #ccc;
   label
+    position: relative
     display: inline-block
     padding-right (step/4)
+
 .btn-group
   display: inline-block
   word-spacing -3px
@@ -17,19 +20,26 @@
 
   button, input, a
     btn()
+    lh()
+    font-size: 14px
     &:first-child
       radiusLeft()
     &:last-child
       radiusRight()
 
 input[type="text"]
+  position: relative
   background: #fff
+  border: none
+  padding: 0 (step/4)
   min-width (step*24)
+  lh()
+  brd(0 0 0 1px #ccc)
 
 input[type="radio"]
-  size: (step*1.5)
+  // size: (step*1.5)
   &:checked
-    btnGrHov()
+    // btnGrHov()
     text-shadow 0 -1px 0 #fff
 
 

@@ -41,7 +41,6 @@ btn()
   else
     btnGr()
   brd()
-  lh(step*1.5)
   color btnClr
   text-shadow 0 1px 0 #fff
   -webkit-appearance button
@@ -76,17 +75,6 @@ minsize()
     min-width: arguments[0]
     min-height: arguments[1]
 
-poza(t=false, r=false, bt=false, l=false )
-  position absolute
-  if t
-    top t
-  if r
-    right r
-  if bt
-    bottom bt
-  if l
-    left l
-
 circle(sz)
   size: (sz)
   border-radius 50%
@@ -110,3 +98,36 @@ posall(n)
 .poszero
   posall(0)
 
+
+
+stripe(even = #fff, odd = #eee)
+  background-color odd
+  &.even
+  &:nth-child(even)
+   background-color even
+
+
+// for row in (1...50)
+//   &:nth-child({row})
+//     background darken(#fff, row*1.2)
+
+
+imp()
+  unquote('!important')
+
+lastChildSpacing(element = '*', property = 'padding-bottom')
+  if element is '*'
+    element = unquote(element)
+  & > {element}:last-child
+    {property} 0
+
+generateGrid(increment, start, end, returnDimension=false)
+  total = start
+  for n, x in 0..((end - start) / increment)
+    if returnDimension
+      if x+1 is returnDimension
+        return total
+    else
+      .column-{x+1}
+        width total
+    total = total + increment

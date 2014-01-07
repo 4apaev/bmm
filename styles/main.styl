@@ -16,10 +16,6 @@ body
 
 sidebarWidth = (step*24)
 
-
-#bookmarks, #results
-  padding step
-
 #bookmarks
   width sidebarWidth
   box-shadow 1px 0 0 #bbb, 2px 0 0 #fff
@@ -39,30 +35,8 @@ header
   margin-left sidebarWidth
   box-shadow 0 1px 0 #bbb, 0 2px 0 #fff
 
-#tools
-  transition opacity 0.35s
-  opacity: 0
-  pointer-events none
-  position: fixed
-  top: 35%
-  left: 50%
-  width: (step*32)
-  margin-left: -(@width / 2)
-  box-shadow 0 1px 3px rgba(0,0,0,0.5)
-  z-index: 999
-  background #fff
-  padding step
-  rd()
-  &:before
-    position: fixed
-    size: 100%
-    background rgba(0,0,0,0.5)
-
-
-#tools.show
-  opacity: 1
-  pointer-events all
-
 
 @import 'nav'
-@import 'bookmarks-2'
+@import 'bookmarks'
+
+generateGrid(300, 1,3)

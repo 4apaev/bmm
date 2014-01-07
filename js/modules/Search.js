@@ -23,6 +23,7 @@ define('modules/Search', [], function () {
     },
 
     parseUrl : function(url) {
+      // _.object('url,protocol,host,path'.split(','), $0.lastChild.txt().match(/(\w+):\/\/([\w.]+)\/(\S*)/))
       var matches = url.match(/(\w+):\/\/([\w.]+)\/(\S*)/);
       return !!matches ? {
          fullurl  : matches[0]
@@ -31,27 +32,7 @@ define('modules/Search', [], function () {
         ,path     : matches[3]
       } : 'no matches';
     },
-
     getSerachMethod: function(key) {
-      // /(date|parentId)/.test(key)
-
-
-      // var self = this;
-
-      // actions = {
-      //   date: function(node) {
-      //     return self.parseDate(node.dateAdded);
-      //   },
-      //   parentId: function(node) {
-      //     return self.parseDate(node.parentId);
-      //   }
-      //   fullurl : function(node) {return self.parseUrl(node.url)[key]}
-      //   protocol : function(node) {return self.parseUrl(node.url)[key]}
-      //   host : function(node) {return self.parseUrl(node.url)[key]}
-      //   path : function(node) {return self.parseUrl(node.url)[key]}
-      // }
-
-
       return (key === 'date') ? function(node) {
         return this.parseDate(node.dateAdded);
       } : function(node) {
@@ -66,7 +47,7 @@ define('modules/Search', [], function () {
 
     filterByRgx: function(rgx) {
       return _.filter(this.index, function(node, path) {
-        return rgx.test(path) || rgx.test(node.url);
+        return rgx.test(node.title) || rgx.test(node.url);
       });
     },
 

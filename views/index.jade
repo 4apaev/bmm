@@ -12,14 +12,13 @@ html
     header
 
       section.ico.nav.search
-        label search
         div.btn-group
-          input(type="radio", name="rgx", class="ico end", value="end")
-          input(type="radio", name="rgx", class="ico or", value="or", "checked")
+          input(type="radio", class="ico regex", value="regex", name="regex")
+          input(type="radio", class="ico plain", value="plain", name="regex")
           input(id="search", type="text", placeholder="placeholder")
-          button.ico.find
+          button(class="ico find")
       section.ico.nav.filter
-        label filter
+        //- label filter
         div.btn-group
           input(type="radio", name="filter", class="ico date", value="date")
           input(type="radio", name="filter", class="ico url", value="url")
@@ -29,14 +28,14 @@ html
 
 
       search.ico.nav.sort
-        label sort
+        //- label sort
         div.btn-group
           button(class="ico up")
           button(class="ico down")
 
 
-    div#bookmarks
-    div#results
+    div#bookmarks.bmm
+    div#results.bmm
       //- section#tools
       //- h3 edit node
 
