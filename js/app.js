@@ -1,6 +1,4 @@
-define('app', ['modules/Flat', 'modules/Search', 'modules/Bmm'], function (Flat, Search, Bmm) {
-
-
+define('app', ['modules/Bmm'], function (Bmm) {
 
   var
     body = document.body,
@@ -15,11 +13,6 @@ define('app', ['modules/Flat', 'modules/Search', 'modules/Bmm'], function (Flat,
   });
 
   chrome.bookmarks.getTree(function(tree) {
-
-    var
-      search = new Search(tree[0]),
-      bmm = new Bmm(tree[0], search);
-      bmm.init();
-    window.bmm = bmm;
+    window.bmm = new Bmm(tree[0]);
   });
 })

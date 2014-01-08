@@ -12,6 +12,21 @@ $ = (function(document, window, $) {
                   ,'@': 'getElementsByName'
                   ,'=': 'getElementsByTagName'
                 }[query[0]] : 'querySelectorAll')](ok ? query.slice(1) : query);
+    },
+    doqa = function(query, scope) {
+      return (scope ? scope : document)['querySelectorAll'](query);
+    },
+    doqi = function(query, scope) {
+      return (scope ? scope : document)['getElementById'](query);
+    },
+    doqc = function(query, scope) {
+      return (scope ? scope : document)['getElementsByClassName'](query);
+    },
+    doqt = function(query, scope) {
+      return (scope ? scope : document)['getElementsByTagName'](query);
+    },
+    doqn = function(query, scope) {
+      return (scope ? scope : document)['getElementsByName'](query);
     };
 
   nodeList['forEach'] = nodeList['each'] = []['forEach'];
@@ -111,16 +126,12 @@ $ = (function(document, window, $) {
   node.append = function(elm) {
     this.appendChild(elm);
   };
-
-  // $ = function(s) {
-  //   console.time('$');
-  //   var r = document.querySelectorAll(s || '☺'),
-  //     length = r.length;
-  //   console.timeEnd('$');
-  //   return length == 1 ? r[0] : r;
-  // };
-
   $ = doq;
+  $.doqi = doqi;
+  $.doqc = doqc;
+  $.doqt = doqt;
+  $.doqn = doqn;
+  $.doqa = doqa;
   $.tar = function(o) { return []['slice'].call(o) };
 
   $.on = node.on.bind(dummy);

@@ -1,62 +1,28 @@
-define('modules/Bmm', [], function () {
-
-
-  var
-    toType = function(x) {
-      return {}['toString'].call(x).match(/\s(\w+)/)[1];
-    }
-    is = function(what, x) {
-      return new RegExp(what, "i").test(toType(x))
-    };
+define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search) {
 
   function Bmm(dump, search) {
-    this.dump = dump;
-    this.search = search;
+    this.search = new Search(dump);
+    tms('dump');
+    this.init(walk(dump, []).join(''));
+    tme('dump');
   }
 
   Bmm.prototype = {
-    getNodeHtml: function(node) {
-      var  klass = 'ico'
-          ,title = node.title || "no title"
-          ,data  = 'data-dir="' + node.parentId + '-' + node.id + '"';
-      if(node.children) {
-        klass += ' toggle';
-        title += " - " + node.children.length;
-        data  += ' data-children="' + node.children.length + '"';
-      }
-      return '<li ' + data + '><b class="' + klass + '" >' + title + '</b>' + (node.url ? '<q class="ico link">' + node.url + '</q>' : '' );
-    },
-
-    walk : function(x, res) {
-
-      _.each(x, function(node) {
-        if(typeof node !== 'object' || node.length && node.length < 1) {
-          return;
-        }
-        var htm = node.length ? ['<ul>', '</ul>'] : [this.getNodeHtml(node), '</li>'];
-        res.push(htm[0]);
-        this.walk(node, res);
-        res.push(htm[1]);
-      }, this);
-      return res;
-    },
 
     init : function(tree) {
-      tms('dump');
+
       var trg = $('#bookmarks');
-      trg.addhtml(this.walk(tree || this.dump, []).join(''));
+      trg.addhtml(tree);
 
       $('#search').on('change', this.doFind.bind(this));
       $('.find').on('click', this.doFind.bind(this));
       $('.sort').on('click', this.sortNodeList.bind(this));
 
       this.updateEventHandlers(trg);
-      tme('dump');
-      // this.showSearchResults(this.search.index);
     },
 
     showSearchResults: function(res) {
-      $("#results").html('<ul>' + this.walk(res, []).join('') + '</ul>');
+      $("#results").html('<ul>' + walk(res, []).join('') + '</ul>');
       this.updateEventHandlers();
     },
 

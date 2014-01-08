@@ -14,8 +14,11 @@ require.config({
   }
 });
 
-window.log = console.log.bind(console);
-window.tms = console.time.bind(console);
-window.tme = console.timeEnd.bind(console);
+var
+   log    = console.log.bind(console)
+  ,tms    = console.time.bind(console)
+  ,tme    = console.timeEnd.bind(console)
+  ,toType = function(x) { return {}['toString'].call(x).match(/\s(\w+)/)[1] }
+  ,is     = function(what, x) { return new RegExp(what, "i").test(toType(x)) };
 
 require(['lodash', 'min', 'app']);
