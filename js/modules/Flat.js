@@ -23,10 +23,10 @@ define('modules/Flat', [], function() {
     },
 
     reverse: function() {
-      _.reduce(this.index, function(r,v,k) {
+      // _.reduce(this.index, function(r,v,k) {
 
-        r[k] =
-      })
+      //   r[k] =
+      // })
     },
 
     getDuplicates: function() {

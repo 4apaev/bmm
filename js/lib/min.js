@@ -1,32 +1,93 @@
 $ = (function(document, window, $) {
 
-  var node = Node.prototype,
+  var
+    node     = Node.prototype,
     nodeList = NodeList.prototype,
-    forEach = 'forEach',
-    trigger = 'trigger',
-    each = [][forEach],
-    dummy = document.createElement('i');
+    dummy    = document.createElement('i'),
+    doq = function(query, scope) {
+      var ok = !/[\s,:]/.test(query);
+      return (scope ? scope : document)[(ok ? {
+                   '#': 'getElementById'
+                  ,'.': 'getElementsByClassName'
+                  ,'@': 'getElementsByName'
+                  ,'=': 'getElementsByTagName'
+                }[query[0]] : 'querySelectorAll')](ok ? query.slice(1) : query);
+    };
 
-  nodeList[forEach] = each;
+  nodeList['forEach'] = nodeList['each'] = []['forEach'];
+
+  window.on = node.on = function(event, fn) {
+    this.addEventListener(event, fn, false);
+    return this;
+  };
+  nodeList.on = function(event, fn) {
+    this['forEach'](function(el) {
+      el.on(event, fn);
+    });
+    return this;
+  };
+  window.off = node.off = function(event, fn) {
+    this.removeEventListener(event, fn, false);
+    return this;
+  };
+  nodeList.off = function(event, fn) {
+    this['forEach'](function(el) {
+      el.off(event, fn);
+    });
+    return this;
+  };
+  window['trigger'] = node['trigger'] = function(type, data) {
+
+    var event = document.createEvent('HTMLEvents');
+    event.initEvent(type, true, true);
+    event.data = data || {};
+    event.eventName = type;
+    event.target = this;
+    this.dispatchEvent(event);
+    return this;
+  };
+
+  nodeList['trigger'] = function(event) {
+    this['forEach'](function(el) {
+      el['trigger'](event);
+    });
+    return this;
+  };
 
   node.dad = function() {
     return this.parentElement;
   };
 
-  node.attr = function(attr, set) {
-    if (!attr) return;
-    return set ? this.setAttribute(attr, set) : this.getAttribute(attr);
+  node.attr = function(val, key) {
+    return key ? this.setAttribute(key, val) : this.getAttribute(val);
   };
 
-  node.find = function(s) {
-    var r = this.querySelectorAll(s || '☺'),
-      length = r.length;
-    return length == 1 ? r[0] : r;
+  node.attrs = function(data) {
+    Object.keys(data).forEach(function(val, key){
+      this.attr(data[val], val);
+    }.bind(this));
   };
+
 
   node.html = function(html) {
     if (html) this.innerHTML = html;
     return this.innerHTML;
+  };
+
+  node.empty = function() {
+    return this.innerHTML = '';
+  };
+
+  node.edit = function(mode) {
+    this.attr(true, "contenteditable");
+  };
+
+  node.hide = function() {
+    this.style.display = 'none';
+  };
+
+  node.show = function() {
+    this.classList.toggle('show');
   };
 
   node.txt = function(txt) {
@@ -39,75 +100,31 @@ $ = (function(document, window, $) {
     return this;
   };
 
-  // node.css = function(stl) {
+  node.before = function(elm) {
+    this.insertBefore(elm, this.firstChild);
+  };
 
-  //   stl = stl || []['slice'].call(this.style);
-  //   var type = stl.constructor.name;
-  //   if (type === 'String') return this.style[stl];
-  //   if (type === 'Array') {
-  //     return []['slice'].call(this.style).map(function(val, i) {
-  //       var obj = {};
-  //       obj[val] = this.style[val];
-  //       return obj;
-  //     }.bind(this))
-  //   }
+  node.after = function(elm) {
+    this.insertBefore(elm);
+  };
 
-  //   stl.forEach(function(val, key) { this.style[key] = val}.bind(this);
+  node.append = function(elm) {
+    this.appendChild(elm);
+  };
 
-  //   return this;
+  // $ = function(s) {
+  //   console.time('$');
+  //   var r = document.querySelectorAll(s || '☺'),
+  //     length = r.length;
+  //   console.timeEnd('$');
+  //   return length == 1 ? r[0] : r;
   // };
 
-  window.on = node.on = function(event, fn) {
-    this.addEventListener(event, fn, false);
-    return this;
-  };
-
-  nodeList.on = function(event, fn) {
-    this[forEach](function(el) {
-      el.on(event, fn);
-    });
-    return this;
-  };
-
-  window.off = node.off = function(event, fn) {
-    this.removeEventListener(event, fn, false);
-    return this;
-  };
-
-  nodeList.off = function(event, fn) {
-    this[forEach](function(el) {
-      el.off(event, fn);
-    });
-    return this;
-  };
-
-  window[trigger] = node[trigger] = function(type, data) {
-
-    var event = document.createEvent('HTMLEvents');
-    event.initEvent(type, true, true);
-    event.data = data || {};
-    event.eventName = type;
-    event.target = this;
-    this.dispatchEvent(event);
-    return this;
-  };
-
-  nodeList[trigger] = function(event) {
-    this[forEach](function(el) {
-      el[trigger](event);
-    });
-    return this;
-  };
-
-  $ = function(s) {
-
-    var r = document.querySelectorAll(s || '☺'),
-      length = r.length;
-    return length == 1 ? r[0] : r;
-  };
+  $ = doq;
+  $.tar = function(o) { return []['slice'].call(o) };
 
   $.on = node.on.bind(dummy);
-  $[trigger] = node[trigger].bind(dummy);
+  $['trigger'] = node['trigger'].bind(dummy);
   $.do = document.createElement.bind(document);
 
   return $;

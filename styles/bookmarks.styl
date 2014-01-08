@@ -13,6 +13,7 @@ itemColor = teal
     ellipsis()
   li
     stripe(#f0f0f0, #f5f5f5)
+    transition all 0.35s
   li[data-children]
     transition max-height 0.25s
     max-height (step*1.5)
@@ -34,34 +35,37 @@ itemColor = teal
     padding (step/4)
     > b
       color itemColor
-      pointer-events none
       font-weight: normal
     > q
       display none
 
-  [contentEditable]
+  li.editNode
     w = (step/8)
-    padding 0 !important
-    background brdClr
+    padding 0 imp()
+    background brdClr imp()
     outline none
+    margin step 0
     rd()
     b, q
-      color hovClr
-      pointer-events all
       background: #fff
       padding: (step/4)
-      margin: w (step*4) w w
-      display: block !important
-    b
-      rd(3px 0 0 0)
-    q
-      rd(0 0 0 3px)
+      margin: w (step*4)
+      display: block imp()
+      &:focus
+        background lightyellow
+        outline none
 
     button
       btn()
-      radiusRight()
       width ((step*4) - (step/4))
+      font-size: step
       position absolute
-      right w
       top w
       bottom w
+      &:first-child
+        radiusLeft()
+        left w
+      &:last-child
+        radiusRight()
+        right w
+

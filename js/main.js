@@ -14,4 +14,8 @@ require.config({
   }
 });
 
+window.log = console.log.bind(console);
+window.tms = console.time.bind(console);
+window.tme = console.timeEnd.bind(console);
+
 require(['lodash', 'min', 'app']);
