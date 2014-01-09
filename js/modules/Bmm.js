@@ -48,6 +48,23 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
       // find[0].click();
     },
 
+    showEmpty: function(trg) {
+
+      $.dq("#results").html('<ul class="empty"></ul>');
+
+      var
+        trg  = $.dq("#results > ul"),
+        frag = document.createDocumentFragment();
+
+      $('#bookmarks li[data-children="0"]').each(frag.append.bind(frag));
+      trg.append(frag);
+    },
+
+    updateEventHandlers: function(trg) {
+      trg = trg || $.doqi('results');
+      $.doqa('li:not([data-children]', trg).on('dblclick', this.toggleEditMode.bind(this));
+    },
+
     updateEventHandlers: function(trg) {
       trg = trg || $.doqi('results');
       $.doqa('li:not([data-children]', trg).on('dblclick', this.toggleEditMode.bind(this));
