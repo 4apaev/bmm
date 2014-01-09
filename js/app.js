@@ -1,4 +1,4 @@
-define('app', ['modules/Bmm'], function (Bmm) {
+define('app', ['modules/Bmm', 'modules/Flat'], function (Bmm, Flat) {
 
   var
     body = document.body,
@@ -14,5 +14,6 @@ define('app', ['modules/Bmm'], function (Bmm) {
 
   chrome.bookmarks.getTree(function(tree) {
     window.bmm = new Bmm(tree[0]);
+    window.flt = new Flat(tree);
   });
 })

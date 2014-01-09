@@ -1,7 +1,7 @@
 define('modules/Flat', [], function() {
 
   function Flat(tree) {
-    this.tree = tree[0].children;
+    this.tree = tree;
   }
 
   Flat.prototype = {
@@ -14,19 +14,13 @@ define('modules/Flat', [], function() {
     dump: function(x, obj, path) {
       _.each(x, function(val, key) {
         if(val instanceof Object) {
+          if(val.length) log(path, key, val.length);
           this.dump(val, obj, path.concat('_').concat(key));
         } else{
           obj[path] ? obj[path][key] = val : obj[path] = _.object([key],[val]);
         }
       }, this);
       return obj;
-    },
-
-    reverse: function() {
-      // _.reduce(this.index, function(r,v,k) {
-
-      //   r[k] =
-      // })
     },
 
     getDuplicates: function() {
@@ -59,8 +53,6 @@ define('modules/Flat', [], function() {
       }
       return _.groupBy(this.index, fns[what]);
     }
-
-
   }
 
   return Flat;

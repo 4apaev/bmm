@@ -1,21 +1,6 @@
 define('modules/walk', [], function () {
 
-  var
-  // template1 = function(node) {
-  //   var
-  //      klass = 'ico'
-  //     ,title = node.title || "no title"
-  //     ,data  = 'data-dir="' + node.parentId + '-' + node.id + '"';
-
-  //   if (node.children) {
-  //     klass += ' toggle';
-  //     title += " - " + node.children.length;
-  //     data  += ' data-children="' + node.children.length + '"';
-  //   };
-  //   return '<li ' + data + '><b class="' + klass + '" >' + title + '</b>' + (node.url ? '<q class="ico link">' + node.url + '</q>' : '' );
-  // },
-
-  template2 = function(node) {
+  var template2 = function(node) {
     var
       title = node.title || "no title",
       data  = 'data-dir="' + node.parentId + '-' + node.id + '"';
@@ -26,7 +11,7 @@ define('modules/walk', [], function () {
     };
 
     return '<li ' + data + '><input name="toggle" type="checkbox" class="ico toggle"><label>' + title + '</label>' + (node.url ? '<q class="ico link">' + node.url + '</q>' : '' );
-  }
+  };
 
 
   return function walk(x, res) {

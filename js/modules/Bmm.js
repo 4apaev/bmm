@@ -1,28 +1,51 @@
 define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search) {
 
+
+  var marko = function (child) {
+    var btn = child.firstElementChild;
+    if(btn && btn.classList.contains('toggle') && !btn.checked) {
+      btn.click();
+      return marko(child.parentElement.parentElement);
+    } else {
+      return;
+    }
+  }
+
   function Bmm(dump, search) {
     this.search = new Search(dump);
-    tms('dump');
     this.init(walk(dump, []).join(''));
-    tme('dump');
   }
 
   Bmm.prototype = {
 
     init : function(tree) {
 
-      var trg = $.doqi('bookmarks');
+      var
+        trg    = $.doqi('bookmarks'),
+        search = $.doqi('search'),
+        find   = $.doqc('find');
+
       trg.addhtml(tree);
 
-      $.doqi('search').on('change', this.doFind.bind(this));
-      $.doqc('find').on('click', this.doFind.bind(this));
+      search.on('change', this.doFind.bind(this));
+      find.on('click', this.doFind.bind(this));
       $.doqc('sort').on('click', this.sortNodeList.bind(this));
-
-      // $.doqa('li[data-children] > label', trg).on('dblclick', function(e) {
-      //   e.currentTarget.edit(!e.currentTarget.hasAttribute('contenteditable'));
-      // });
+      $.doqc('find').on('click', this.doFind.bind(this));
 
       this.updateEventHandlers(trg);
+
+      // var emptyDirs = $('#bookmarks li[data-children="0"]');
+      // emptyDirs.each(function(node) {
+      //   node.style.backgroundColor = "crimson";
+      //   marko(node);
+      // });
+      // log(emptyDirs);
+
+      // $.doqi('results').html('<ul>' + walk(res, []).join('') + '</ul>');
+      // this.updateEventHandlers();
+
+      // search.value = "flash";
+      // find[0].click();
     },
 
     updateEventHandlers: function(trg) {
@@ -74,13 +97,54 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
       btnCancel = $.do('button');
 
       $.doqa("label, q", trg).each(function(el) { el.edit(true) })
+
       trg.before(btnSave);
       trg.after(btnCancel);
 
       btnSave.classList.add('ico', 'save');
       btnCancel.classList.add('ico', 'cancel');
       trg.classList.add('editNode');
+
+      btnCancel.on('click', this.onRemoveBtnClick.bind(this));
     },
+
+    onRemoveBtnClick: function(e) {
+
+      var
+          btn = e.currentTarget,
+          dad = e.currentTarget.dad(),
+          ids = dad.dataset.dir.split('-'),
+          del = btn.classList.contains('remove')
+          self = this;
+
+      if(del) {
+
+        chrome.bookmarks.remove(ids[1], function() {
+          $('.bmm li[data-dir="' + dad.dataset.dir + '"]').each(function(li) {
+            log(li);
+            li.remove();
+          });
+        });
+
+      } else {
+
+        chrome.bookmarks.get(ids[1], function(bmmNode) {
+
+          var twin = $('#bookmarks li[data-dir="' + dad.dataset.dir + '"]')[0];
+          twin.scrollIntoView();
+          twin.style.backgroundColor = "crimson";
+          dad.style.backgroundColor = "crimson";
+          btn.style.width = "auto";
+
+          btn.txt("are you shure?");
+          btn.classList.add('remove');
+
+          marko(twin.parentElement.parentElement);
+
+        });
+      }
+    },
+
 
     doFind: function() {
 
@@ -95,3 +159,24 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
   }
   return Bmm;
 })
+
+
+// var path = [];
+
+// var el = document.getElementById('myNode');
+
+
+
+
+// do {
+//     path.unshift(el.nodeName + (el.dataset.dir ? ' data-dir="' + el.dataset.dir + '"' : ''));
+
+// } while ((el.nodeName.toLowerCase() != 'html') && (el = el.parentNode));
+
+// function nodePath(x, res) {
+
+
+//     return res;
+//   }
+
+
