@@ -11,25 +11,34 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
 
     init : function(tree) {
 
-      var trg = $('#bookmarks');
+      var trg = $.doqi('bookmarks');
       trg.addhtml(tree);
 
-      $('#search').on('change', this.doFind.bind(this));
-      $('.find').on('click', this.doFind.bind(this));
-      $('.sort').on('click', this.sortNodeList.bind(this));
+      $.doqi('search').on('change', this.doFind.bind(this));
+      $.doqc('find').on('click', this.doFind.bind(this));
+      $.doqc('sort').on('click', this.sortNodeList.bind(this));
+
+      // $.doqa('li[data-children] > label', trg).on('dblclick', function(e) {
+      //   e.currentTarget.edit(!e.currentTarget.hasAttribute('contenteditable'));
+      // });
 
       this.updateEventHandlers(trg);
     },
 
+    updateEventHandlers: function(trg) {
+      trg = trg || $.doqi('results');
+      $.doqa('li:not([data-children]', trg).on('dblclick', this.toggleEditMode.bind(this));
+    },
+
     showSearchResults: function(res) {
-      $("#results").html('<ul>' + walk(res, []).join('') + '</ul>');
+      $.doqi('results').html('<ul>' + walk(res, []).join('') + '</ul>');
       this.updateEventHandlers();
     },
 
     sortNodeList: function() {
       var
-        filterBy = _.find($('@filter'), 'checked').value
-        trg  = $("#results > ul")[0],
+        filterBy = _.find($.doqn('filter'), 'checked').value
+        trg  = $.dq("#results > ul"),
         frag = document.createDocumentFragment(),
         fn = frag.append.bind(frag);
 
@@ -37,12 +46,6 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
 
       trg.empty();
       trg.append(frag);
-    },
-
-    updateEventHandlers: function(trg) {
-      trg = trg || $('#results');
-      $('.toggle', trg).on('click', function(e) { this.dad().show() });
-      $('li:not([data-children])', trg).on('dblclick', this.toggleEditMode.bind(this));
     },
 
     toggleEditMode: function(e) {
@@ -53,7 +56,7 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
         trg = e.currentTarget,
         editMode = !trg.classList.contains('editNode');
 
-      $('.editNode').each(function(nod) {
+      $.doqc('editNode').each(function(nod) {
         nod.firstChild.remove();
         nod.lastChild.remove();
         nod.firstChild.edit(false);
@@ -70,7 +73,7 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
       btnSave   = $.do('button'),
       btnCancel = $.do('button');
 
-      $(".ico", trg).each(function(el) { el.edit(true) })
+      $.doqa("label, q", trg).each(function(el) { el.edit(true) })
       trg.before(btnSave);
       trg.after(btnCancel);
 
@@ -81,10 +84,10 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
 
     doFind: function() {
 
-      var val = $('#search').value.trim();
+      var val = $.doqi('search').value.trim();
 
       if(!val) return;
-      var sort = _.find($('@filter'), 'checked').value, rgx  = 'or';
+      var sort = _.find($.doqn('filter'), 'checked').value, rgx  = 'or';
 
       this.lastSearch = this.search.doSearch(val, sort, rgx);
       this.showSearchResults(this.lastSearch.reverse());

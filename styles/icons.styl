@@ -59,18 +59,13 @@ $glyph
 .ico.cancel:before
   content: "\e873"
 
-
-
-// folders
-
-b.ico:not(.toggle):before
+li > .ico.toggle:before
   content: '\e806'
-b.ico.toggle:before
-  content: '\e893'
-  [data-children="0"] > &
-    content: '\e813'
-  .show > &
-    content: '\e894'
 
-.ico.link:before
-  content: "\e804"
+[data-children]
+  > .ico.toggle
+    &:before
+      content: '\e893'
+    &:checked
+      &:before
+        content: '\e894'

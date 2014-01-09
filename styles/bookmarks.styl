@@ -11,42 +11,59 @@ itemColor = teal
     vertical-align top
     position relative
     ellipsis()
+
   li
     stripe(#f0f0f0, #f5f5f5)
     transition all 0.35s
-  li[data-children]
-    transition max-height 0.25s
-    max-height (step*1.5)
-    > ul
-      transition opacity 0.35s
-      padding 0 0 0 step
-      opacity: 0
-    > b
-      display block
-      color dirColor
-      lh(step*1.5)
 
-  li.show[data-children]
-    max-height 9999px
+    input[type="checkbox"]
+      inputStyle()
+
+    label
+      display inline-block
+      color dirColor
+      margin-left step
+
+  li[data-children]
+
     > ul
-      opacity: 1
+      transition all 0.35s
+      padding 0 0 0 step
+      max-height 0
+      opacity: 0
+
+    > label
+      lh(step*1.5)
+      &[contenteditable]
+        background: #fff
+        padding: (step/4)
+
+    > input[type="checkbox"]
+      lh(step*1.5)
+      position: absolute
+      size: 100% (step*1.5)
+
+      &:checked ~ ul
+        max-height 9999px
+        opacity: 1
 
   li:not([data-children])
     padding (step/4)
-    > b
-      color itemColor
-      font-weight: normal
     > q
       display none
 
   li.editNode
+
     w = (step/8)
     padding 0 imp()
     background brdClr imp()
     outline none
     margin step 0
     rd()
-    b, q
+    > input
+      display none
+    > label,
+    > q
       background: #fff
       padding: (step/4)
       margin: w (step*2)
@@ -55,7 +72,7 @@ itemColor = teal
         background lightyellow
         outline none
 
-    button
+    > button
       btn()
       width ((step*2) - (step/4))
       font-size: step

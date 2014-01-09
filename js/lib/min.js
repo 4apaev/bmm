@@ -13,21 +13,13 @@ $ = (function(document, window, $) {
                   ,'=': 'getElementsByTagName'
                 }[query[0]] : 'querySelectorAll')](ok ? query.slice(1) : query);
     },
-    doqa = function(query, scope) {
-      return (scope ? scope : document)['querySelectorAll'](query);
-    },
-    doqi = function(query, scope) {
-      return (scope ? scope : document)['getElementById'](query);
-    },
-    doqc = function(query, scope) {
-      return (scope ? scope : document)['getElementsByClassName'](query);
-    },
-    doqt = function(query, scope) {
-      return (scope ? scope : document)['getElementsByTagName'](query);
-    },
-    doqn = function(query, scope) {
-      return (scope ? scope : document)['getElementsByName'](query);
-    };
+
+    doqa = function(query, scope) {return (scope ? scope : document).querySelectorAll(query) },
+    doqi = function(query, scope) {return (scope ? scope : document).getElementById(query) },
+    doqc = function(query, scope) {return (scope ? scope : document).getElementsByClassName(query) },
+    doqt = function(query, scope) {return (scope ? scope : document).getElementsByTagName(query) },
+    doqn = function(query, scope) {return (scope ? scope : document).getElementsByName(query) },
+    dq   = function(query, scope) {return (scope ? scope : document).querySelector(query) };
 
   nodeList['forEach'] = nodeList['each'] = []['forEach'];
 
@@ -132,6 +124,7 @@ $ = (function(document, window, $) {
   $.doqt = doqt;
   $.doqn = doqn;
   $.doqa = doqa;
+  $.dq = dq;
   $.tar = function(o) { return []['slice'].call(o) };
 
   $.on = node.on.bind(dummy);
