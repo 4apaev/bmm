@@ -1,62 +1,33 @@
-ol
-  &.tree
-    padding 0 0 0 30px
-    width 300px
+.bmm
+  ol
+    ol
+      display none
+  li
+    padding 0 0 0 step
+    lh(step*1.5)
+    vertical-align top
+    position relative
+    input
+      inputStyle()
+      lh(step*1.5)
+      cursor pointer
+      float left
+      margin-right: (step/4)
+      &:checked ~ ol
+        display block
 
-li
-  position relative
-  margin-left -15px
-  list-style none
-  &.file
-    margin-left -1px !important
-    a
-      background url(document.png) 0 0 no-repeat
-      color #fff
-      padding-left 21px
-      text-decoration none
-      display block
-    a[href
-      *=
-        '.pdf']
-          background url(document.png) 0 0 no-repeat
-        '.html']
-          background url(document.png) 0 0 no-repeat
-      $=
-        '.css']
-          background url(document.png) 0 0 no-repeat
-        '.js']
-          background url(document.png) 0 0 no-repeat
-  input
-    position absolute
-    left 0
-    margin-left 0
-    opacity 0
-    z-index 2
-    cursor pointer
-    height 1em
-    width 1em
-    top 0
-    & + ol
-      background url(toggle-small-expand.png) 40px 0 no-repeat
-      margin -0.938em 0 0 -44px
-      height 1em
-      & > li
-        display none
-        margin-left -14px !important
-        padding-left 1px
-    &:checked
-      & + ol
-        background url(toggle-small.png) 40px 5px no-repeat
-        margin -1.25em 0 0 -44px
-        padding 1.563em 0 0 80px
-        height auto
-        & > li
-          display block
-          margin 0 0 0.125em
-          &:last-child
-            margin 0 0 0.063em
-  label
-    background url(folder-horizontal.png) 15px 1px no-repeat
-    cursor pointer
-    display block
-    padding-left 37px
+    label
+      cursor pointer
+      ellipsis()
+    button
+      btn()
+      transition all 0.35s
+      position: absolute
+      rd()
+      padding 4px
+      opacity: 0
+
+    &:hover
+      > button
+        opacity: 1
+        left -8px

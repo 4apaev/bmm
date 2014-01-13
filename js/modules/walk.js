@@ -1,30 +1,33 @@
 define('modules/walk', [], function () {
 
-  var template2 = function(node) {
-    var
-      title = node.title || "no title",
-      data  = 'data-dir="' + node.parentId + '-' + node.id + '"';
-
-    if (node.children) {
-      title += " - " + node.children.length;
-      data  += ' data-children="' + node.children.length + '"';
-    };
-
-    return '<li ' + data + '><input name="toggle" type="checkbox" class="ico toggle"><label>' + title + '</label>' + (node.url ? '<q class="ico link">' + node.url + '</q>' : '' );
-  };
-
-
   return function walk(x, res) {
-    _.each(x, function(node) {
-      if(typeof node !== 'object' || node.length && node.length < 1) {
+
+    _.each(x, function(node, key, curr) {
+
+      if(typeof node !== 'object') {
         return;
       }
-      var htm = node.length ? ['<ul>', '</ul>'] : [template2(node), '</li>'];
-      res.push(htm[0]);
+
+      var start, finish;
+
+      if(node.constructor.name == 'Array') {
+        start = '<input class="ico dir" type="checkbox"><ol class="kids-' + node.length + ' parent-' + curr.id + '">';
+        finish = '</ol>';
+      } else {
+        start  = '<li id="node-' + node.id + '"><button class="ico edit"></button><label>' + (node.title || 'no name') + '</label>';
+        finish = '</li>';
+      }
+
+      res.push(start);
       walk(node, res);
-      res.push(htm[1]);
+      res.push(finish);
+
     });
     return res;
   }
 
 })
+
+
+
+

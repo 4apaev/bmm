@@ -9,17 +9,13 @@ define('modules/Flat', [], function() {
     init: function(tree) {
       tree = tree || this.tree;
       this.index = this.dump(tree,{},'');
+
     },
 
     dump: function(x, obj, path) {
       _.each(x, function(val, key) {
-
         if(val instanceof Object) {
-
-          // if(val.length) log(path, key, val.length);
-
           this.dump(val, obj, path.concat('_').concat(key));
-
         } else{
           obj[path] ? obj[path][key] = val : obj[path] = _.object([key],[val]);
         }

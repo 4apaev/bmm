@@ -11,8 +11,10 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
   }
 
   function Bmm(dump, search) {
-    this.search = new Search(dump);
-    this.init(walk(dump, []).join(''));
+    this.dump = dump[0].children;
+    tms('dump')
+    this.init();
+    tme('dump')
   }
 
   Bmm.prototype = {
@@ -24,39 +26,39 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
         search = $.doqi('search'),
         find   = $.doqc('find');
 
-      trg.addhtml(tree);
 
-      search.on('change', this.doFind.bind(this));
+      trg.html('<ol class="tree">' + walk(tree || this.dump, []).join('') + '</ol>');
+
+
       find.on('click', this.doFind.bind(this));
-      $.doqc('sort').on('click', this.sortNodeList.bind(this));
-      $.doqc('find').on('click', this.doFind.bind(this));
+      search.on('change', this.doFind.bind(this));
 
-      this.updateEventHandlers(trg);
+      $('.bmm button').on('click', function(e) {
+        var id = e.currentTarget.parentElement.id.split('-').pop();
+        chrome.bookmarks.get(id, function(node) {
+            var popup = document.getElementById('editPopup');
+            popup.querySelector('.title').value = node[0].title;
+            popup.querySelector('.url').value = node[0].url;
+        })
+      });
+
     },
 
-    showEmpty: function(trg) {
-      $.dq("#results").html('<ul class="empty"></ul>');
-      var
-        trg  = $.dq("#results > ul"),
-        frag = document.createDocumentFragment();
-      $('#bookmarks li[data-children="0"]').each(frag.append.bind(frag));
-      trg.append(frag);
-    },
-
-    updateEventHandlers: function(trg) {
-      trg = trg || $.doqi('results');
-      $.doqa('li:not([data-children]', trg).on('dblclick', this.toggleEditMode.bind(this));
-    },
+    // updateEventHandlers: function(trg) {
+    //   trg = trg || $.doqi('results');
+    //   $.doqa('li:not([data-children]', trg).on('dblclick', this.toggleEditMode.bind(this));
+    // },
 
     showSearchResults: function(res) {
-      $.doqi('results').html('<ul>' + walk(res, []).join('') + '</ul>');
-      this.updateEventHandlers();
+      log(res)
+      $.doqi('results').html('<ol>' + walk(res, []).join('') + '</ol>');
+      // this.updateEventHandlers();
     },
 
     sortNodeList: function() {
       var
         filterBy = _.find($.doqn('filter'), 'checked').value
-        trg  = $.dq("#results > ul"),
+        trg  = $.dq("#results > ol"),
         frag = document.createDocumentFragment(),
         fn = frag.append.bind(frag);
 
@@ -66,84 +68,83 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
       trg.append(frag);
     },
 
-    toggleEditMode: function(e) {
+    // toggleEditMode: function(e) {
 
-      var
-        btnSave,
-        btnCancel,
-        trg = e.currentTarget,
-        editMode = !trg.classList.contains('editNode');
+    //   var
+    //     btnSave,
+    //     btnCancel,
+    //     trg = e.currentTarget,
+    //     editMode = !trg.classList.contains('editNode');
 
-      $.doqc('editNode').each(function(nod) {
-        nod.firstChild.remove();
-        nod.lastChild.remove();
-        nod.firstChild.edit(false);
-        nod.lastChild.edit(false);
-        nod.classList.remove('editNode');
-      });
+    //   $.doqc('editNode').each(function(nod) {
+    //     nod.firstChild.remove();
+    //     nod.lastChild.remove();
+    //     nod.firstChild.edit(false);
+    //     nod.lastChild.edit(false);
+    //     nod.classList.remove('editNode');
+    //   });
 
-      if(!editMode) {
-        return;
-      }
+    //   if(!editMode) {
+    //     return;
+    //   }
 
-      trg.classList.toggle('editNode');
+    //   trg.classList.toggle('editNode');
 
-      btnSave   = $.do('button'),
-      btnCancel = $.do('button');
+    //   btnSave   = $.do('button'),
+    //   btnCancel = $.do('button');
 
-      $.doqa("label, q", trg).each(function(el) { el.edit(true) })
+    //   $.doqa("label, q", trg).each(function(el) { el.edit(true) })
 
-      trg.before(btnSave);
-      trg.after(btnCancel);
+    //   trg.before(btnSave);
+    //   trg.after(btnCancel);
 
-      btnSave.classList.add('ico', 'save');
-      btnCancel.classList.add('ico', 'cancel');
-      trg.classList.add('editNode');
+    //   btnSave.classList.add('ico', 'save');
+    //   btnCancel.classList.add('ico', 'cancel');
+    //   trg.classList.add('editNode');
 
-      btnCancel.on('click', this.onRemoveBtnClick.bind(this));
-    },
+    //   btnCancel.on('click', this.onRemoveBtnClick.bind(this));
+    // },
 
-    onRemoveBtnClick: function(e) {
+    // onRemoveBtnClick: function(e) {
 
-      var
-          btn = e.currentTarget,
-          dad = e.currentTarget.dad(),
-          ids = dad.dataset.dir.split('-'),
-          del = btn.classList.contains('remove')
-          self = this;
+    //   var
+    //       btn = e.currentTarget,
+    //       dad = e.currentTarget.dad(),
+    //       ids = dad.dataset.dir.split('-'),
+    //       del = btn.classList.contains('remove')
+    //       self = this;
 
-      if(del) {
+    //   if(del) {
 
-        chrome.bookmarks.remove(ids[1], function() {
-          $('.bmm li[data-dir="' + dad.dataset.dir + '"]').each(function(li) {
-            log(li);
-            li.remove();
-          });
-        });
+    //     chrome.bookmarks.remove(ids[1], function() {
+    //       $('.bmm li[data-dir="' + dad.dataset.dir + '"]').each(function(li) {
+    //         log(li);
+    //         li.remove();
+    //       });
+    //     });
 
-      } else {
+    //   } else {
 
-        chrome.bookmarks.get(ids[1], function(bmmNode) {
-          var twin = $('#bookmarks li[data-dir="' + dad.dataset.dir + '"]')[0];
-          twin.scrollIntoView();
-          twin.style.backgroundColor = "crimson";
-          dad.style.backgroundColor = "crimson";
-          btn.style.width = "auto";
-          btn.txt("are you shure?");
-          btn.classList.add('remove');
-          marko(twin.parentElement.parentElement);
-        });
-      }
-    },
+    //     chrome.bookmarks.get(ids[1], function(bmmNode) {
+    //       var twin = $('#bookmarks li[data-dir="' + dad.dataset.dir + '"]')[0];
+    //       twin.scrollIntoView();
+    //       twin.style.backgroundColor = "crimson";
+    //       dad.style.backgroundColor = "crimson";
+    //       btn.style.width = "auto";
+    //       btn.txt("are you shure?");
+    //       btn.classList.add('remove');
+    //       marko(twin.parentElement.parentElement);
+    //     });
+    //   }
+    // },
 
     doFind: function() {
       var
         sort,
         val = $.doqi('search').value.trim();
       if(!val) return;
-      sort = _.find($.doqn('filter'), 'checked').value, rgx  = 'or';
-      this.lastSearch = this.search.doSearch(val, sort, rgx);
-      this.showSearchResults(this.lastSearch.reverse());
+
+      chrome.bookmarks.search(val, this.showSearchResults.bind(this));
     }
   }
   return Bmm;

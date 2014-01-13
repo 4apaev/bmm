@@ -9,12 +9,10 @@ html
     link(rel="stylesheet", href="css/main.css")
 
   body
-    header
 
+    header
       section.ico.nav.search
         div.btn-group
-          input(type="radio", class="ico regex", value="regex", name="regex")
-          input(type="radio", class="ico plain", value="plain", name="regex")
           input(id="search", type="text", placeholder="placeholder")
           button(class="ico find")
       section.ico.nav.filter
@@ -35,6 +33,17 @@ html
 
     div#bookmarks.bmm
     div#results.bmm
+
+    div#editPopup
+      h3.date
+
+      input(type="text", class="title")
+      input(type="text", class="url")
+
+      div.btn-group
+        button(class="ico save")
+        button(class="ico remove")
+        button(class="ico cancel")
 
     script(data-main="js/main", src="js/lib/require.js")
 

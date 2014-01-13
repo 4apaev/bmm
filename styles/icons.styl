@@ -12,7 +12,6 @@ $glyph
   font-family: "fontello"
   display: inline-block
   text-decoration: none
-  margin-right: 4px
   font-weight: normal
   font-style: normal
 
@@ -42,30 +41,20 @@ $glyph
 
 .ico.find:before
   content: "\e800"
-.ico.regex:before
-  content: "\e881"
-.ico.plain:before
-  content: "\e89d"
-
 
 .ico.remove:before
-  // content: "\e873"
   content: "\e816"
 .ico.edit:before
-  // content: "\e80c"
-  content: "\e864"
+  // content: "\e864"
+  content: "\e819"
 .ico.save:before
   content: "\e872"
 .ico.cancel:before
   content: "\e873"
 
-li > .ico.toggle:before
-  content: '\e806'
-
-[data-children]
-  > .ico.toggle
+.ico.dir
+  &:before
+    content: '\e893'
+  &:checked
     &:before
-      content: '\e893'
-    &:checked
-      &:before
-        content: '\e894'
+      content: '\e894'
