@@ -16,7 +16,16 @@ var
     },
 
     cpDone: function (err, stdout, stderr) {
-      if (err) throw err;
+      // if (err) throw err
+
+      var date = new Date().toTimeString().split(' ').shift();
+
+      if (err) {
+        console.log(date.red);
+        console.log(String(err).grey);
+        return;
+      }
+
       console.log(new Date().toTimeString().split(' ').shift().green, stdout);
     },
 
