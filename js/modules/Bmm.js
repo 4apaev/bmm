@@ -24,10 +24,11 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
       var
         trg    = $.doqi('bookmarks'),
         search = $.doqi('search'),
-        find   = $.doqc('find');
+        find   = $.doqc('find'),
+        htm = walk(tree || this.dump, []);
 
 
-      trg.html('<ol class="tree">' + walk(tree || this.dump, []).join('') + '</ol>');
+      trg.html('<ol class="tree">' + htm.join('') + '</ol>');
 
 
       find.on('click', this.doFind.bind(this));

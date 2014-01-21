@@ -2,41 +2,32 @@
   position: relative
   display: inline-block
   padding step
-  box-shadow: 1px 0 0 #fff, 2px 0 0 #ccc;
+  box-shadow: 1px 0 0 brdClr;
+
   label
     position: relative
     display: inline-block
-    padding-right (step/4)
+    padding-right: sz(4)
+
+input[type="text"]
+  background: #fff
+  padding: 0 sz(2)
+  box-shadow: 0 0 0 1px brdClr
+  lh(2,'*')
 
 .btn-group
   display: inline-block
   word-spacing -3px
   vertical-align: middle
 
-  button, input, a
+  button, input[type="radio"], input[type="checkbox"], a
     btn()
-    lh()
-    font-size: 14px
+  button, input, a
+    box-shadow: 0 0 0 1px darken(brdClr,10)
     &:first-child
-      radiusLeft()
+      radLeft()
     &:last-child
-      radiusRight()
+      radRight()
 
-input[type="text"]
-  position: relative
-  background: #fff
-  border: none
-  padding: 0 (step/4)
-  min-width (step*24)
-  lh()
-  brd(0 0 0 1px #ccc)
-
-input[type="radio"]
-  &:checked
-    btnGrHov()
-    text-shadow 0 -1px 0 #fff
-
-button, [type="radio"]
-  &:focus
-    btnGrHov()
-    text-shadow 0 -1px 0 #fff
+  input[type="text"]
+    display: inline-block

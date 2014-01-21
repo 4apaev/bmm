@@ -1,0 +1,57 @@
+imp()
+  unquote('!important')
+
+///////////////////////////////// Shadow
+brd()
+  box-shadow: arguments || 0 0 0 1px brdClr
+shd = brd
+
+//////////////////////////////////////////////////
+inputStyle(type='none')
+  -webkit-appearance: unquote(type)
+
+//////////////////////////////////////////////////
+bg()
+  background: arguments || #fff
+
+///////////////////////////////// Scroll
+scrollY()
+  overflow-x: hidden
+  overflow-y: auto
+
+scrollX()
+  overflow-y: hidden
+  overflow-x: auto
+
+
+///////////////////////////////// Radius
+rd(n = 3px)
+  border-radius n
+
+radTop(n = 3px)
+  border-radius n n 0 0
+
+radBottom(n = 3px)
+  border-radius 0 0 n n
+
+radLeft(n = 3px)
+  border-radius n 0 0 n
+
+radRight(n = 3px)
+  border-radius 0 n n 0
+
+///////////////////////////////// PosBox
+
+circle()
+  border-radius 50%
+
+.left
+  float: left
+  margin: 0 step step 0
+
+.right
+  float: right
+  margin: 0 0 step step
+
+///////////////////////////////// Gr
+

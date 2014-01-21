@@ -14,35 +14,44 @@ html, body
 
 body
   color txtClr
-  background: #f0f0f0
-  font normal 13px/step Helvetica, arial, freesans, clean, sans-serif
+  font-size: 12px
+  lh(1,'*')
+  font-family: Helvetica, arial, freesans, clean, sans-serif
 
-sidebarWidth = (step*24)
+.dev
+  rhytmGr()
+
+sidebarWidth = sz(24, '*')
+
+scrollAxis()
+  overflow-x: arguments ? auto : hidden
+  overflow-y: arguments ? hidden : auto
 
 #bookmarks
   width sidebarWidth
-  box-shadow 1px 0 0 #bbb, 2px 0 0 #fff
+  box-shadow 1px 0 0 brdClr
   fixed(top left)
   bottom: 0
-  scrollY()
+  scrollAxis()
 
 #results
   position: fixed
-  top: (step*5)
+  top: sz(5, '*')
   left: sidebarWidth
   bottom: 0
   right: 0
-  scrollY()
+  scrollAxis()
 
 header
   margin-left sidebarWidth
-  box-shadow 0 1px 0 #bbb, 0 2px 0 #fff
+  box-shadow 0 1px 0 brdClr
 
 #editPopup
-  center(512px,256px)
+  display: none
+  margin: 25%
   rd(5px)
-  background #fff
-  padding 16px
+  bg()
+  padding step
   box-shadow 0 1px 3px rgba(0, 0, 0, 0.5)
 
 

@@ -1,33 +1,39 @@
 .bmm
-  ol
-    ol
-      display none
+  padding: step
+  box-sizing: border-box
+  ol ol
+    display none
+
   li
-    padding 0 0 0 step
-    lh(step*1.5)
+    padding: 0 0 0 step
     vertical-align top
     position relative
+    min-height step
+    lh(1,'*')
     input
       inputStyle()
-      lh(step*1.5)
-      cursor pointer
-      float left
-      margin-right: (step/4)
+      absolute(top, left)
+      width: 100%
+      min-height step
+      lh(1,'*')
+      &:before
+        color: brdClr
       &:checked ~ ol
         display block
+      &:hover
+        bg(actClr)
 
     label
-      cursor pointer
       ellipsis()
-    button
-      btn()
-      transition all 0.35s
-      position: absolute
-      rd()
-      padding 4px
-      opacity: 0
+    // button
+    //   btn()
+    //   transition all 0.35s
+    //   position: absolute
+    //   rd()
+    //   padding sz(4)
+    //   opacity: 0
 
-    &:hover
-      > button
-        opacity: 1
-        left -8px
+    // &:hover
+    //   > button
+    //     opacity: 1
+    //     left -sz(2)

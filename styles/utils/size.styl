@@ -1,0 +1,23 @@
+size()
+  if length(arguments) == 1
+    width: sz(arguments[0])
+    height: sz(arguments[0])
+  else
+    width: sz(arguments[0])
+    height: sz(arguments[1])
+
+sizeMin()
+  if length(arguments) == 1
+    min-width: sz(arguments[0])
+    min-height: sz(arguments[0])
+  else
+    min-width: sz(arguments[0])
+    min-height: sz(arguments[1])
+
+sizeMax()
+  if length(arguments) == 1
+    max-width: sz(arguments[0])
+    max-height: sz(arguments[0])
+  else
+    max-width: sz(arguments[0])
+    max-height: sz(arguments[1])

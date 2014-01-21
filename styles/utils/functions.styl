@@ -1,0 +1,43 @@
+lastChildSpacing(element = '*', property = 'padding-bottom')
+  if element is '*'
+    element = unquote(element)
+  & > {element}:last-child
+    {property} 0
+
+generateGrid(increment, start, end, returnDimension=false)
+  total = start
+  for n, x in 0..((end - start) / increment)
+    if returnDimension
+      if x+1 is returnDimension
+        return total
+    else
+      .column-{x+1}
+        width total
+    total = total + increment
+
+stripe(even = #fff, odd = #eee)
+  background-color odd
+  &.even
+  &:nth-child(even)
+   background-color even
+
+sz(n=1, op='/')
+  operate(op, step, unit(n, px))
+
+lh(a,b)
+  line-height: sz(a,b)
+
+
+///////////////////////////////// Border
+
+border(color, args...)
+  if color is a 'color'
+    border: 1px solid color args
+  else
+    border: arguments
+
+// rhythm()
+//   step*(sum(arguments)%step)
+// for row in (1...50)
+//   &:nth-child({row})
+//     background darken(#fff, row*1.2)
