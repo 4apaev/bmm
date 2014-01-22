@@ -4,12 +4,24 @@
   padding step
   box-shadow: 1px 0 0 brdClr;
 
-  label
-    position: relative
-    display: inline-block
-    padding-right: sz(4)
+form.hslColors
+  rd()
+  display: inline-block
+  padding-top: sz(4,'*')
+  box-shadow: 0 0 0 1px brdClr
+  overflow: hidden
+  word-spacing -3px
+  vertical-align: bottom
+  select
+    btn()
+    box-shadow: 0 0 0 1px darken(brdClr,10)
+    &:first-child
+      border-radius 0 0 0 3px
+    &:last-child
+      border-radius 0 0 3px 0
 
-input[type="text"]
+
+input[type="text"], input[type="number"]
   background: #fff
   padding: 0 sz(2)
   box-shadow: 0 0 0 1px brdClr
@@ -20,14 +32,11 @@ input[type="text"]
   word-spacing -3px
   vertical-align: middle
 
-  button, input[type="radio"], input[type="checkbox"], a
+  button, input[type="radio"], input[type="checkbox"]
     btn()
-  button, input, a
+  button, input
     box-shadow: 0 0 0 1px darken(brdClr,10)
     &:first-child
       radLeft()
     &:last-child
       radRight()
-
-  input[type="text"]
-    display: inline-block

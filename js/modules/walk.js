@@ -12,11 +12,14 @@ define('modules/walk', [], function () {
 
       if(node.constructor.name == 'Array') {
 
-        start = '<input class="ico dir" type="checkbox"><ol class="kids-' + node.length + '">';
+        start = '<input class="ico dir" type="checkbox"><ol>';
         finish = '</ol>';
 
       } else {
-        start  = '<li id="node-' + node.id + '">' + (node.title || '-');
+        start  = '<li id="node-' + node.id
+                + '" class="'
+                + (node.children ? 'kids-' + node.children.length : 'kid') + '">'
+                + '<span>' + node.title + '</span>';
         finish = '</li>';
       }
 

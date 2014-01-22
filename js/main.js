@@ -23,12 +23,4 @@ var
 
 require(['lodash', 'min', 'app']);
 
-// a = [200, 5, 10, 2];
 
-// _.map(a, function(v) {
-//   var s = v%16;
-//   return {
-//     sz:v,
-//     st:16*s
-//   }
-// })

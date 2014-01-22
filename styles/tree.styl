@@ -4,36 +4,30 @@
   ol ol
     display none
 
-  li
-    padding: 0 0 0 step
-    vertical-align top
-    position relative
-    min-height step
-    lh(1,'*')
-    input
-      inputStyle()
-      absolute(top, left)
-      width: 100%
-      min-height step
-      lh(1,'*')
-      &:before
-        color: brdClr
-      &:checked ~ ol
-        display block
+.bmm li
+  lh()
+  padding: 0 0 0 step
+  vertical-align top
+  position relative
+  min-height step
+  &.kids-0
+    color red
+
+.bmm li input
+
+  appearance()
+  absolute(top, left)
+  lh()
+  width: 100%
+  min-height step
+
+  &:before
+    color: brdClr
+
+  &:checked ~ ol
+    display block
+    span
       &:hover
         bg(actClr)
-
-    label
+    span
       ellipsis()
-    // button
-    //   btn()
-    //   transition all 0.35s
-    //   position: absolute
-    //   rd()
-    //   padding sz(4)
-    //   opacity: 0
-
-    // &:hover
-    //   > button
-    //     opacity: 1
-    //     left -sz(2)

@@ -28,11 +28,11 @@ scrollAxis()
   overflow-y: arguments ? hidden : auto
 
 #bookmarks
-  width sidebarWidth
-  box-shadow 1px 0 0 brdClr
+  scrollAxis()
   fixed(top left)
   bottom: 0
-  scrollAxis()
+  width sidebarWidth
+  box-shadow 1px 0 0 brdClr
 
 #results
   position: fixed
@@ -40,7 +40,20 @@ scrollAxis()
   left: sidebarWidth
   bottom: 0
   right: 0
-  scrollAxis()
+  overflow-y: auto
+  overflow-x: hidden
+
+.hideRes
+  #bookmarks
+    width: 100%
+  #results
+    left: 100%
+
+.hideTree
+  #bookmarks
+    width: 0
+  #results
+    left: 0
 
 header
   margin-left sidebarWidth
@@ -48,12 +61,17 @@ header
 
 #editPopup
   display: none
-  margin: 25%
-  rd(5px)
-  bg()
-  padding step
-  box-shadow 0 1px 3px rgba(0, 0, 0, 0.5)
+  // margin: 25%
+  // rd(5px)
+  // bg()
+  // padding step
+  // box-shadow 0 1px 3px rgba(0, 0, 0, 0.5)
 
 
 @import 'nav'
 @import 'tree'
+
+
+doHslLight(30, 0, 360)
+
+

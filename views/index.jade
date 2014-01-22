@@ -8,42 +8,43 @@ html
     title Bookmark Manager
     link(rel="stylesheet", href="css/main.css")
 
-  body.dev
+  body
 
     header
       section.ico.nav.search
-        div.btn-group
+        form.btn-group
           input(id="search", type="text", placeholder="placeholder")
           button(class="ico find")
+
       section.ico.nav.filter
+        form.btn-group
+          each i in ["date","url","host","path","protocol"]
+            input(type="radio", name="filter", class="ico " + i, value=i)
 
-        div.btn-group
-          input(type="radio", name="filter", class="ico date", value="date")
-          input(type="radio", name="filter", class="ico url", value="url")
-          input(type="radio", name="filter", class="ico host", value="host", "checked")
-          input(type="radio", name="filter", class="ico path", value="path")
-          input(type="radio", name="filter", class="ico protocol", value="protocol")
-
-
-      search.ico.nav.sort
+      section.ico.nav.sort
         div.btn-group
           button(class="ico up")
           button(class="ico down")
 
-
     div#bookmarks.bmm
     div#results.bmm
 
+      form.hslColors.ico
+        each olo in ["hue", "satur", "light"]
+          -var arr = (olo === "hue") ? [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330] : ["25%", "50%", "75%", "100%"]
+          select(name=olo)
+            each val in arr
+              option= val
+
     div#editPopup
       h3.date
-
       input(type="text", class="title")
       input(type="text", class="url")
 
       div.btn-group
-        button(class="ico save")
-        button(class="ico remove")
-        button(class="ico cancel")
+        button.ico.save
+        button.ico.remove
+        button.ico.cancel
 
     script(data-main="js/main", src="js/lib/require.js")
 

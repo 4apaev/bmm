@@ -1,4 +1,4 @@
-define('app', ['modules/Bmm', 'modules/Flat'], function (Bmm, Flat) {
+define('app', ['modules/Bmm', 'modules/colors'], function (Bmm, colors) {
 
   var
     body = document.body,
@@ -12,8 +12,15 @@ define('app', ['modules/Bmm', 'modules/Flat'], function (Bmm, Flat) {
     },500);
   });
 
+
+
   chrome.bookmarks.getTree(function(tree) {
-    window.bmm = new Bmm(tree);
-    // window.flt = new Flat(tree);
+    window.app = {
+      bmm: new Bmm(tree),
+      colors: colors
+    }
+
+    app.colors.handleHsl();
+
   });
 })

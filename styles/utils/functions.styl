@@ -1,19 +1,30 @@
-lastChildSpacing(element = '*', property = 'padding-bottom')
+fixLast(element = '*', property = 'padding-bottom')
   if element is '*'
     element = unquote(element)
   & > {element}:last-child
     {property} 0
 
-generateGrid(increment, start, end, returnDimension=false)
+///////////////////////////////// Hsl
+
+
+doHslLight(increment, start, end)
+  total = start
+  for x in 0..((end - start) / increment)
+    for c in (0..10)
+      sat = c*10
+      .hsl-{x+1}-{c}
+        padding step
+        background: unquote('hsl(' + total + ', ' + sat + '%, 50%)')
+    total = total + increment
+
+doHsl(increment, start, end)
   total = start
   for n, x in 0..((end - start) / increment)
-    if returnDimension
-      if x+1 is returnDimension
-        return total
-    else
-      .column-{x+1}
-        width total
+    .colored-{x+1}
+      background: unquote('hsl(' + total + ', 100%, 50%)')
     total = total + increment
+
+/////////////////////////////////
 
 stripe(even = #fff, odd = #eee)
   background-color odd
@@ -21,12 +32,13 @@ stripe(even = #fff, odd = #eee)
   &:nth-child(even)
    background-color even
 
+///////////////////////////////// Rhytm
+
 sz(n=1, op='/')
   operate(op, step, unit(n, px))
 
-lh(a,b)
-  line-height: sz(a,b)
-
+lh(n=1, op='/')
+  line-height: operate(op, step, unit(n, px))
 
 ///////////////////////////////// Border
 
@@ -35,9 +47,3 @@ border(color, args...)
     border: 1px solid color args
   else
     border: arguments
-
-// rhythm()
-//   step*(sum(arguments)%step)
-// for row in (1...50)
-//   &:nth-child({row})
-//     background darken(#fff, row*1.2)
