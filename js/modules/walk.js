@@ -19,7 +19,7 @@ define('modules/walk', [], function () {
         start  = '<li id="node-' + node.id
                 + '" class="'
                 + (node.children ? 'kids-' + node.children.length : 'kid') + '">'
-                + '<span>' + node.title + '</span>';
+                + '<span>' + (node.title || node.url) + '</span>';
         finish = '</li>';
       }
 

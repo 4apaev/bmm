@@ -1,225 +1,157 @@
-define('modules/colors', [], function () {
+define('modules/colors', [], function() {
 
-  var clr = [
-    { aliceblue           : [240, 248, 255] },
-    { antiquewhite        : [250, 235, 215] },
-    { crimson             : [220, 20 , 60 ] },
-    { aqua                : [0  , 255, 255] },
-    { black               : [0  , 0  , 0  ] },
-    { cyan                : [0  , 255, 255] },
-    { darkblue            : [0  , 0  , 139] },
-    { darkcyan            : [0  , 139, 139] },
-    { blue                : [0  , 0  , 255] },
-    { darkgreen           : [0  , 100, 0  ] },
-    { darkturquoise       : [0  , 206, 209] },
-    { deepskyblue         : [0  , 191, 255] },
-    { aquamarine          : [127, 255, 212] },
-    { azure               : [240, 255, 255] },
-    { beige               : [245, 245, 220] },
-    { bisque              : [255, 228, 196] },
-    { blanchedalmond      : [255, 235, 205] },
-    { blueviolet          : [138, 43 , 226] },
-    { brown               : [165, 42 , 42 ] },
-    { burlywood           : [222, 184, 135] },
-    { cadetblue           : [95 , 158, 160] },
-    { chartreuse          : [127, 255, 0  ] },
-    { chocolate           : [210, 105, 30 ] },
-    { coral               : [255, 127, 80 ] },
-    { cornflowerblue      : [100, 149, 237] },
-    { cornsilk            : [255, 248, 220] },
-    { darkgoldenrod       : [184, 132, 11 ] },
-    { darkgray            : [169, 169, 169] },
-    { darkgrey            : [169, 169, 169] },
-    { darkkhaki           : [189, 183, 107] },
-    { darkmagenta         : [139, 0  , 139] },
-    { darkolivegreen      : [85 , 107, 47 ] },
-    { darkorange          : [255, 140, 0  ] },
-    { darkorchid          : [153, 50 , 204] },
-    { darkred             : [139, 0  , 0  ] },
-    { darksalmon          : [233, 150, 122] },
-    { darkseagreen        : [143, 188, 143] },
-    { darkslateblue       : [72 , 61 , 139] },
-    { darkslategray       : [47 , 79 , 79 ] },
-    { darkslategrey       : [47 , 79 , 79 ] },
-    { darkviolet          : [148, 0  , 211] },
-    { deeppink            : [255, 20 , 147] },
-    { dimgray             : [105, 105, 105] },
-    { dimgrey             : [105, 105, 105] },
-    { dodgerblue          : [30 , 144, 255] },
-    { firebrick           : [178, 34 , 34 ] },
-    { floralwhite         : [255, 255, 240] },
-    { forestgreen         : [34 , 139, 34 ] },
-    { fuchsia             : [255, 0  , 255] },
-    { gainsboro           : [220, 220, 220] },
-    { ghostwhite          : [248, 248, 255] },
-    { gold                : [255, 215, 0  ] },
-    { goldenrod           : [218, 165, 32 ] },
-    { gray                : [128, 128, 128] },
-    { green               : [0  , 128, 0  ] },
-    { greenyellow         : [173, 255, 47 ] },
-    { grey                : [128, 128, 128] },
-    { honeydew            : [240, 255, 240] },
-    { hotpink             : [255, 105, 180] },
-    { indianred           : [205, 92 , 92 ] },
-    { indigo              : [75 , 0  , 130] },
-    { ivory               : [255, 255, 240] },
-    { khaki               : [240, 230, 140] },
-    { lavender            : [230, 230, 250] },
-    { lavenderblush       : [255, 240, 245] },
-    { lawngreen           : [124, 252, 0  ] },
-    { lemonchiffon        : [255, 250, 205] },
-    { lightblue           : [173, 216, 230] },
-    { lightcoral          : [240, 128, 128] },
-    { lightcyan           : [224, 255, 255] },
-    { lightgoldenrodyellow: [250, 250, 210] },
-    { lightgray           : [211, 211, 211] },
-    { lightgreen          : [144, 238, 144] },
-    { lightgrey           : [211, 211, 211] },
-    { lightpink           : [255, 182, 193] },
-    { lightsalmon         : [255, 160, 122] },
-    { lightseagreen       : [32 , 178, 170] },
-    { lightskyblue        : [135, 206, 250] },
-    { lightslategray      : [119, 136, 153] },
-    { lightslategrey      : [119, 136, 153] },
-    { lightsteelblue      : [176, 196, 222] },
-    { lightyellow         : [255, 255, 224] },
-    { lime                : [0  , 255, 0  ] },
-    { limegreen           : [50 , 205, 50 ] },
-    { linen               : [250, 240, 230] },
-    { magenta             : [255, 0  , 255] },
-    { maroon              : [128, 0  , 0  ] },
-    { mediumaquamarine    : [102, 205, 170] },
-    { mediumblue          : [0  , 0  , 205] },
-    { mediumorchid        : [186, 85 , 211] },
-    { mediumpurple        : [147, 112, 219] },
-    { mediumseagreen      : [60 , 179, 113] },
-    { mediumslateblue     : [123, 104, 238] },
-    { mediumspringgreen   : [0  , 250, 154] },
-    { mediumturquoise     : [72 , 209, 204] },
-    { mediumvioletred     : [199, 21 , 133] },
-    { midnightblue        : [25 , 25 , 112] },
-    { mintcream           : [245, 255, 250] },
-    { mistyrose           : [255, 228, 225] },
-    { moccasin            : [255, 228, 181] },
-    { navajowhite         : [255, 222, 173] },
-    { navy                : [0  , 0  , 128] },
-    { oldlace             : [253, 245, 230] },
-    { olive               : [128, 128, 0  ] },
-    { olivedrab           : [107, 142, 35 ] },
-    { orange              : [255, 165, 0  ] },
-    { orangered           : [255, 69 , 0  ] },
-    { orchid              : [218, 112, 214] },
-    { palegoldenrod       : [238, 232, 170] },
-    { palegreen           : [152, 251, 152] },
-    { paleturquoise       : [175, 238, 238] },
-    { palevioletred       : [219, 112, 147] },
-    { papayawhip          : [255, 239, 213] },
-    { peachpuff           : [255, 218, 185] },
-    { peru                : [205, 133, 63 ] },
-    { pink                : [255, 192, 203] },
-    { plum                : [221, 160, 203] },
-    { powderblue          : [176, 224, 230] },
-    { purple              : [128, 0  , 128] },
-    { red                 : [255, 0  , 0  ] },
-    { rosybrown           : [188, 143, 143] },
-    { royalblue           : [65 , 105, 225] },
-    { saddlebrown         : [139, 69 , 19 ] },
-    { salmon              : [250, 128, 114] },
-    { sandybrown          : [244, 164, 96 ] },
-    { seagreen            : [46 , 139, 87 ] },
-    { seashell            : [255, 245, 238] },
-    { sienna              : [160, 82 , 45 ] },
-    { silver              : [192, 192, 192] },
-    { skyblue             : [135, 206, 235] },
-    { slateblue           : [106, 90 , 205] },
-    { slategray           : [119, 128, 144] },
-    { slategrey           : [119, 128, 144] },
-    { snow                : [255, 255, 250] },
-    { springgreen         : [0  , 255, 127] },
-    { steelblue           : [70 , 130, 180] },
-    { tan                 : [210, 180, 140] },
-    { teal                : [0  , 128, 128] },
-    { thistle             : [216, 191, 216] },
-    { tomato              : [255, 99 , 71 ] },
-    { turquoise           : [64 , 224, 208] },
-    { violet              : [238, 130, 238] },
-    { wheat               : [245, 222, 179] },
-    { white               : [255, 255, 255] },
-    { whitesmoke          : [245, 245, 245] },
-    { yellow              : [255, 255, 0  ] },
-    { yellowgreen         : [154, 205, 5  ] }
-  ];
-
-  var
+    var
     template = '<i style="display:inline-block; padding:4px; background:{{color}};">{{color}}</i>',
-    template1 = '<i style="display:inline-block; padding:16px; background:{{color}};"></i>',
-    getRegex =  function(str) { return new RegExp(str, "g")},
-    compile = function(node) { return template.replace(/\{\{color\}\}/g, _.keys(node)[0]) },
+        template1 = '<li style="display:inline-block; padding:16px; background:{{color}};"></li>',
+        getRegex = function(str) {
+            return new RegExp(str, "g")
+        },
+        compile = function(node) {
+            return template.replace(/\{\{color\}\}/g, _.keys(node)[0])
+        },
 
-    sortRgba = function(n) {
-      return _.sortBy(clr, function(o) {
-        return _.values(o)[0][n]
-      });
-    },
+        sortRgba = function(n) {
+            return _.sortBy(clr, function(o) {
+                return _.values(o)[0][n]
+            });
+        },
 
-    filterByNames = function(key) {
-      return _.filter(clr, function(o) {
-        return getRegex(key).test(_.keys(o)[0]);
-      });
-    },
+        filterByNames = function(key) {
+            return _.filter(clr, function(o) {
+                return getRegex(key).test(_.keys(o)[0]);
+            });
+        },
 
-    filterByNames = function(key) {
-      return _.filter(clr, function(o) {
-        return getRegex(key).test(_.keys(o)[0]);
-      });
-    },
+        filterByNames = function(key) {
+            return _.filter(clr, function(o) {
+                return getRegex(key).test(_.keys(o)[0]);
+            });
+        },
 
-    doHsl = function(e) {
-      var form = e.currentTarget;
-      form.style.backgroundColor = 'hsl(' + _.map(form.elements, function(sel){ return sel.value}) + ')'
-    },
+        doHsl = function(e) {
+            var form = e.currentTarget;
+            form.style.backgroundColor = 'hsl(' + _.map(form.elements, function(sel) {
+                return sel.value
+            }) + ')'
+        },
+
+        rgb2hex = function(r, g, b) {
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        },
+        hsl2rgb = function(h, s, l) {
+
+            var r, g, b, m, c, x
+
+            if (!isFinite(h)) h = 0
+            if (!isFinite(s)) s = 0
+            if (!isFinite(l)) l = 0
+
+            h /= 60
+            if (h < 0) h = 6 - (-h % 6)
+            h %= 6
+
+            s = Math.max(0, Math.min(1, s / 100))
+            l = Math.max(0, Math.min(1, l / 100))
+
+            c = (1 - Math.abs((2 * l) - 1)) * s
+            x = c * (1 - Math.abs((h % 2) - 1))
+
+            if (h < 1) {
+                r = c
+                g = x
+                b = 0
+            } else if (h < 2) {
+                r = x
+                g = c
+                b = 0
+            } else if (h < 3) {
+                r = 0
+                g = c
+                b = x
+            } else if (h < 4) {
+                r = 0
+                g = x
+                b = c
+            } else if (h < 5) {
+                r = x
+                g = 0
+                b = c
+            } else {
+                r = c
+                g = 0
+                b = x
+            }
+            m = l - c / 2
+            return [
+                Math.round((r + m) * 255),
+                Math.round((g + m) * 255),
+                Math.round((b + m) * 255)
+            ]
+
+        },
 
 
 
-    container = document.getElementById('results');
+        container = document.getElementById('results');
 
     return {
 
-      handleHsl: function(n) {
-        $('=form', container).on('change', doHsl);
-      },
+        handleHsl: function(n) {
+            $('=form', container).on('change', doHsl);
+        },
 
-      sortColorsBy: function(n) {
-        return sortRgba(n);
-      },
+        sortColorsBy: function(n) {
+            return sortRgba(n);
+        },
 
-      filterColorsBy: function(n) {
-        return filterByNames(n);
-      },
+        filterColorsBy: function(n) {
+            return filterByNames(n);
+        },
 
-      renderBy: function(n, byName) {
-        var fn = byName ? filterByNames : sortRgba;
-        container.innerHTML = _.map(fn(n), compile).join('');
-      },
+        renderBy: function(n, byName) {
+            var fn = byName ? filterByNames : sortRgba;
+            container.innerHTML = _.map(fn(n), compile).join('');
+        },
 
-      kekeke : function(rangeHue, rangeSat) {
-        var
-          hue = _.range(rangeHue,390,rangeHue),
-          sat = _.range(rangeSat,100,rangeSat),
-          lit = sat,
-          res = '';
+        renderHsl: function(rangeHue, rangeSat) {
+            var
+                hue = _.range(rangeHue, 390, rangeHue),
+                sat = _.range(rangeSat, 100, rangeSat),
+                lum = sat,
+                res = '',
+                tpl = '<div class="lum lum-{{lum}}" style="background:{{hex}};"><ul><li>hex:{{hex}}</li><li>rgb:{{rgb}}</li><li>hsl:{{hsl}}</li></ul></div>';
 
-        _.each(hue, function(hv, hk) {
-          _.each(sat, function(sv, sk) {
-              res +='<br>'
-            _.each(lit, function(lv, lk) {
-              res +=template1.replace(/\{\{color\}\}/, 'hsl(' + hv + ',' + sv + '%,' + lv+ '%)');
+            _.each(hue, function(h) {
+                res += '<div class="hue hue-' + h + '">';
+                _.each(sat, function(s) {
+                    res += '<div class="sat sat-' + s + '">';
+                    _.each(lum, function(l) {
+
+                        var
+                            hsl = h + ',' + s + '%,' + l + '%',
+                            rgb = hsl2rgb(h,s,l),
+                            hex = rgb2hex(rgb[0], rgb[1], rgb[2]);
+
+                            res += tpl
+                                    .replace(/\{\{lum\}\}/g, l)
+                                    .replace(/\{\{hex\}\}/g, hex)
+                                    .replace(/\{\{hsl\}\}/, hsl)
+                                    .replace(/\{\{rgb\}\}/, rgb);
+                    });
+                    res += '</div>';
+                });
+                res += '</div>';
             });
-          });
-        });
+            container.innerHTML = res;
+        },
 
-        container.innerHTML = res;
-      }
+        rgb2hex: function(r, g, b) {
+            return rgb2hex(r, g, b);
+        },
+
+        hsl2rgb: function(h, s, l) {
+            return hsl2rgb(h, s, l)
+        }
 
     }
 

@@ -6,12 +6,31 @@
 
 .bmm li
   lh()
-  padding: 0 0 0 step
+  padding-left: sz()
   vertical-align top
   position relative
   min-height step
+  &:before
+    display: inline-block
+    content: ''
+    position: absolute
+    left: sz(-2)
+    width: sz(2)
+    height: sz()
+    border-left: 1px solid
+    border-bottom: 1px solid
+    box-sizing: border-box
+    border-color: tan
+
   &.kids-0
-    color red
+    color crimson imp
+
+  li.kid
+    // stripe(azure, #fff)
+    // &:hover
+    //   bg(actClr)
+    padding-left: sz(2)
+
 
 .bmm li input
 
@@ -26,8 +45,5 @@
 
   &:checked ~ ol
     display block
-    span
-      &:hover
-        bg(actClr)
     span
       ellipsis()

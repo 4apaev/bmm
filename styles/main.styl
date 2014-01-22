@@ -32,7 +32,7 @@ scrollAxis()
   fixed(top left)
   bottom: 0
   width sidebarWidth
-  box-shadow 1px 0 0 brdClr
+  box-shadow 1px 0 0 lighten(brdClr,20)
 
 #results
   position: fixed
@@ -57,7 +57,7 @@ scrollAxis()
 
 header
   margin-left sidebarWidth
-  box-shadow 0 1px 0 brdClr
+  box-shadow 0 1px 0 lighten(brdClr,20)
 
 #editPopup
   display: none
@@ -72,6 +72,22 @@ header
 @import 'tree'
 
 
-doHslLight(30, 0, 360)
+// doHslLight(30, 0, 360)
 
+.sat
+  display flex
+  > div
+    padding 8px
+    flex 1
+    position relative
+    min-height: sz(4,'*')
+    ul
+      posall(sz(4))
+      opacity: 0
+      bg(#fff)
+    &:hover ul
+      opacity: 1
+
+.disable-hover
+  pointer-events: none !important
 

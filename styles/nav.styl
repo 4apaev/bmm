@@ -1,12 +1,15 @@
-.nav
-  position: relative
-  display: inline-block
-  padding step
-  box-shadow: 1px 0 0 brdClr;
+
+.flex
+  display flex
+  .nav
+    flex 1
+    position: relative
+    padding step
+    box-shadow: 1px 0 0 brdClr;
 
 form.hslColors
   rd()
-  display: inline-block
+  display: flex
   padding-top: sz(4,'*')
   box-shadow: 0 0 0 1px brdClr
   overflow: hidden
@@ -14,6 +17,7 @@ form.hslColors
   vertical-align: bottom
   select
     btn()
+    flex 1
     box-shadow: 0 0 0 1px darken(brdClr,10)
     &:first-child
       border-radius 0 0 0 3px
@@ -22,18 +26,20 @@ form.hslColors
 
 
 input[type="text"], input[type="number"]
+  flex 2
   background: #fff
   padding: 0 sz(2)
   box-shadow: 0 0 0 1px brdClr
   lh(2,'*')
 
 .btn-group
-  display: inline-block
+  display: flex
   word-spacing -3px
   vertical-align: middle
 
   button, input[type="radio"], input[type="checkbox"]
     btn()
+    flex 1
   button, input
     box-shadow: 0 0 0 1px darken(brdClr,10)
     &:first-child

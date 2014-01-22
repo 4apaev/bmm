@@ -31,6 +31,7 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
       trg.html('<ol class="tree">' + htm.join('') + '</ol>');
 
 
+
       find.on('click', this.doFind.bind(this));
       search.on('change', this.doFind.bind(this));
 

@@ -4,25 +4,6 @@ fixLast(element = '*', property = 'padding-bottom')
   & > {element}:last-child
     {property} 0
 
-///////////////////////////////// Hsl
-
-
-doHslLight(increment, start, end)
-  total = start
-  for x in 0..((end - start) / increment)
-    for c in (0..10)
-      sat = c*10
-      .hsl-{x+1}-{c}
-        padding step
-        background: unquote('hsl(' + total + ', ' + sat + '%, 50%)')
-    total = total + increment
-
-doHsl(increment, start, end)
-  total = start
-  for n, x in 0..((end - start) / increment)
-    .colored-{x+1}
-      background: unquote('hsl(' + total + ', 100%, 50%)')
-    total = total + increment
 
 /////////////////////////////////
 

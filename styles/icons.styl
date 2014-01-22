@@ -45,17 +45,21 @@ iconFont('../css/font', 'fontello')
 .ico.cancel:before
   content: "\e873"
 
-.ico.dir
+
+icoActive(a,b)
   &:before
-    content: '\e893'
+    content: a
   &:checked
     &:before
-      content: '\e894'
+      content: b
+
+.ico.dir
+  icoActive('\e893', '\e894')
 
 .kids-0 > .ico.dir
-  &:before
-    content: '\e83e'
-  &:checked
-    &:before
-      content: '\e83e'
+  icoActive('\e83e', '\e83e')
 
+// .kid:before
+//   font-family: "fontello"
+//   display: inline-block
+//   content: '\e830'
