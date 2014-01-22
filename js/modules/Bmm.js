@@ -24,25 +24,21 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
       var
         trg    = $.doqi('bookmarks'),
         search = $.doqi('search'),
-        find   = $.doqc('find'),
         htm = walk(tree || this.dump, []);
 
 
       trg.html('<ol class="tree">' + htm.join('') + '</ol>');
 
-
-
-      find.on('click', this.doFind.bind(this));
       search.on('change', this.doFind.bind(this));
 
-      $('.bmm button').on('click', function(e) {
-        var id = e.currentTarget.parentElement.id.split('-').pop();
-        chrome.bookmarks.get(id, function(node) {
-            var popup = document.getElementById('editPopup');
-            popup.querySelector('.title').value = node[0].title;
-            popup.querySelector('.url').value = node[0].url;
-        })
-      });
+      // $('.bmm button').on('click', function(e) {
+      //   var id = e.currentTarget.parentElement.id.split('-').pop();
+      //   chrome.bookmarks.get(id, function(node) {
+      //       var popup = document.getElementById('editPopup');
+      //       popup.querySelector('.title').value = node[0].title;
+      //       popup.querySelector('.url').value = node[0].url;
+      //   })
+      // });
 
     },
 
@@ -53,14 +49,14 @@ define('modules/Bmm', ['modules/walk', 'modules/Search'], function (walk, Search
 
     showSearchResults: function(res) {
       log(res)
-      $.doqi('results').html('<ol>' + walk(res, []).join('') + '</ol>');
+      $.doqi('stage').html('<ol class="tree">' + walk(res, []).join('') + '</ol>');
       // this.updateEventHandlers();
     },
 
     sortNodeList: function() {
       var
         filterBy = _.find($.doqn('filter'), 'checked').value
-        trg  = $.dq("#results > ol"),
+        trg  = $.dq("#stage .tree"),
         frag = document.createDocumentFragment(),
         fn = frag.append.bind(frag);
 

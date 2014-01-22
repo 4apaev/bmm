@@ -92,7 +92,7 @@ define('modules/colors', [], function() {
 
 
 
-        container = document.getElementById('results');
+        container = document.getElementById('stage');
 
     return {
 
@@ -119,7 +119,8 @@ define('modules/colors', [], function() {
                 sat = _.range(rangeSat, 100, rangeSat),
                 lum = sat,
                 res = '',
-                tpl = '<div class="lum lum-{{lum}}" style="background:{{hex}};"><ul><li>hex:{{hex}}</li><li>rgb:{{rgb}}</li><li>hsl:{{hsl}}</li></ul></div>';
+                // tpl = '<div class="lum lum-{{lum}}" style="background:{{hex}};"><ul><li>hex:{{hex}}</li><li>rgb:{{rgb}}</li><li>hsl:{{hsl}}</li></ul></div>';
+                tpl = '<div class="lum lum-{{lum}}" style="background:{{hex}};"></div>';
 
             _.each(hue, function(h) {
                 res += '<div class="hue hue-' + h + '">';

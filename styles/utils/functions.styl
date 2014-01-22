@@ -28,3 +28,8 @@ border(color, args...)
     border: 1px solid color args
   else
     border: arguments
+
+doFlex(a,b)
+  for x in a..b
+    .box-{x}
+      flex: x x auto

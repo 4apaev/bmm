@@ -21,6 +21,7 @@ define('app', ['modules/Bmm', 'modules/colors'], function (Bmm, colors) {
     }
 
     app.colors.handleHsl();
+    app.colors.renderHsl(30,20)
 
   });
 })

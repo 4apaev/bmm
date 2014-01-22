@@ -1,49 +1,56 @@
-.bmm
+.tree
   padding: step
   box-sizing: border-box
-  ol ol
+  ol
     display none
+  li
+    lh()
+    padding-left: sz()
+    vertical-align top
+    position relative
+    min-height step
+    &:before
+      display: inline-block
+      content: ''
+      position: absolute
+      height: sz()
+      border-left: 1px solid
+      border-bottom: 1px solid
+      box-sizing: border-box
+      border-color: tan
 
-.bmm li
-  lh()
-  padding-left: sz()
-  vertical-align top
-  position relative
-  min-height step
-  &:before
-    display: inline-block
-    content: ''
-    position: absolute
+  li.kid:before
+    width: sz()
     left: sz(-2)
-    width: sz(2)
-    height: sz()
-    border-left: 1px solid
-    border-bottom: 1px solid
-    box-sizing: border-box
-    border-color: tan
 
-  &.kids-0
+  li.dad:before
+    width: sz()
+    left: sz(-2)
+
+  li.kids-0
     color crimson imp
 
   li.kid
-    // stripe(azure, #fff)
-    // &:hover
-    //   bg(actClr)
     padding-left: sz(2)
 
+  li input
+    appearance()
+    absolute(top, left)
+    lh()
+    width: 100%
+    &:before
+      color: brdClr
 
-.bmm li input
-
-  appearance()
-  absolute(top, left)
-  lh()
-  width: 100%
-  min-height step
-
-  &:before
-    color: brdClr
-
-  &:checked ~ ol
-    display block
-    span
-      ellipsis()
+    &:checked ~ ol
+      display: flex
+      flex-flow: column
+      > .dad
+          order 1
+      > .kid
+          order 3
+      > .kids-0
+          order 2
+      span
+        display: block
+        max-width: 100%
+        ellipsis()

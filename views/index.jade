@@ -8,43 +8,49 @@ html
     title Bookmark Manager
     link(rel="stylesheet", href="css/main.css")
 
-  body
+  body.layout.col
 
-    header.flex
-      section.ico.nav.search
-        form.btn-group
-          input(id="search", type="text", placeholder="placeholder")
-          button(class="ico find")
+    div.wrap.layout.row.box-1
 
-      section.ico.nav.filter
-        form.btn-group
-          each i in ["date","url","host","path","protocol"]
-            input(type="radio", name="filter", class="ico " + i, value=i)
+      div#bookmarks.bmm.layout.col.box-1
 
-      section.ico.nav.sort
-        div.btn-group
-          button(class="ico up")
-          button(class="ico down")
+      div#results.bmm.layout.col.box-3
 
-    div#bookmarks.bmm
-    div#results.bmm
+        header.layout.row.box-1
 
-      form.hslColors.ico
-        each olo in ["hue", "satur", "light"]
-          -var arr = (olo === "hue") ? [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330] : ["25%", "50%", "75%", "100%"]
-          select(name=olo)
-            each val in arr
-              option= val
+          section.ico.nav.search
+            form.btn-group
+              input(id="search", type="text", placeholder="placeholder")
+              button(class="ico find")
 
-    div#editPopup
-      h3.date
-      input(type="text", class="title")
-      input(type="text", class="url")
+          section.ico.nav.filter
+            form.btn-group
+              each i in ["date","url","host","path","protocol"]
+                input(type="radio", name="filter", class="ico " + i, value=i)
 
-      div.btn-group
-        button.ico.save
-        button.ico.remove
-        button.ico.cancel
+          section.ico.nav.sort
+            div.btn-group
+              button(class="ico up")
+              button(class="ico down")
+
+        section#stage.layout.row.box-8
+
+          form.hslColors.ico
+            each olo in ["hue", "satur", "light"]
+              -var arr = (olo === "hue") ? [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330] : ["25%", "50%", "75%", "100%"]
+              select(name=olo)
+                each val in arr
+                  option= val
+
+    //- div#editPopup.nav
+    //-   h3.date
+    //-   input(type="text", class="title")
+    //-   input(type="text", class="url")
+
+    //-   div.btn-group
+    //-     button.ico.save
+    //-     button.ico.remove
+    //-     button.ico.cancel
 
     script(data-main="js/main", src="js/lib/require.js")
 

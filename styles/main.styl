@@ -18,76 +18,55 @@ body
   lh(1,'*')
   font-family: Helvetica, arial, freesans, clean, sans-serif
 
-.dev
-  rhytmGr()
 
-sidebarWidth = sz(24, '*')
+.layout
+  transition all 0.3s
+  display flex
+.layout.row
+  flex-direction: row
+.layout.col
+  flex-direction: column
 
-scrollAxis()
-  overflow-x: arguments ? auto : hidden
-  overflow-y: arguments ? hidden : auto
 
+doFlex(1,10)
+
+.bmm
+  // max-width: 50%
 #bookmarks
-  scrollAxis()
-  fixed(top left)
-  bottom: 0
-  width sidebarWidth
-  box-shadow 1px 0 0 lighten(brdClr,20)
-
-#results
-  position: fixed
-  top: sz(5, '*')
-  left: sidebarWidth
-  bottom: 0
-  right: 0
-  overflow-y: auto
   overflow-x: hidden
-
-.hideRes
-  #bookmarks
-    width: 100%
-  #results
-    left: 100%
-
-.hideTree
-  #bookmarks
-    width: 0
-  #results
-    left: 0
+  overflow-y: auto
+  box-shadow 1px 0 0 lighten(brdClr,20)
+  // flex-grow: 2
+#results
+  // align-self: stretch
+  // flex-grow: 4
+#stage
+  overflow-x: hidden
+  overflow-y: auto
 
 header
-  margin-left sidebarWidth
   box-shadow 0 1px 0 lighten(brdClr,20)
-
-#editPopup
-  display: none
-  // margin: 25%
-  // rd(5px)
-  // bg()
-  // padding step
-  // box-shadow 0 1px 3px rgba(0, 0, 0, 0.5)
-
+  max-height:sz(4,'*')
+.lum
+  padding step
 
 @import 'nav'
 @import 'tree'
 
+// .sat
+//   display flex
+//   > div
+//     padding 8px
+//     flex 1
+//     position relative
+//     min-height: sz(4,'*')
+//     ul
+//       posall(sz(4))
+//       opacity: 0
+//       bg(#fff)
+//     &:hover ul
+//       opacity: 1
 
-// doHslLight(30, 0, 360)
-
-.sat
-  display flex
-  > div
-    padding 8px
-    flex 1
-    position relative
-    min-height: sz(4,'*')
-    ul
-      posall(sz(4))
-      opacity: 0
-      bg(#fff)
-    &:hover ul
-      opacity: 1
-
-.disable-hover
-  pointer-events: none !important
+// .disable-hover
+//   pointer-events: none !important
 
