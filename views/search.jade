@@ -1,0 +1,10 @@
+form.btn-group
+  input(type="text", class="big grow box-6")
+
+  each i in ["date","url","host","path","protocol"]
+    input(type="radio", name="filter", class="ico " + i, value=i)
+
+
+//- div.ico.btn-group.sort
+//-   button(class="ico up")
+//-   button(class="ico down")

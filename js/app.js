@@ -20,8 +20,8 @@ define('app', ['modules/Bmm', 'modules/colors'], function (Bmm, colors) {
       colors: colors
     }
 
-    app.colors.handleHsl();
-    app.colors.renderHsl(30,20)
+    // app.colors.handleHsl();
+    // app.colors.renderHsl(30,20)
 
   });
 })

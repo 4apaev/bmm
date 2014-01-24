@@ -2,7 +2,7 @@ btn(bg=btnBgClr, clr=btnClr, h=sz(2,'*'))
 
   appearance('none')
   border-radius:0
-  display: inline-block
+  // display: inline-block
   padding: 0 sz(2)
   text-align: center
   height: h
@@ -11,5 +11,7 @@ btn(bg=btnBgClr, clr=btnClr, h=sz(2,'*'))
   color: clr
 
   &:hover, &:checked
-    background-color: lighten(bg,20)
-    color: darken(bg, 20)
+    background-color: darken(bg,20)
+    color: #fff
+
+

@@ -8,50 +8,27 @@ html
     title Bookmark Manager
     link(rel="stylesheet", href="css/main.css")
 
-  body.layout.col
+  body.layout.base.row
 
-    div.wrap.layout.row.box-1
+    //- div.layout.row.wrap.box-1
 
-      div#bookmarks.bmm.layout.col.box-1
+    div.col.box-2#root
+      include tree
 
-      div#results.bmm.layout.col.box-3
+    div.col.box-8
 
-        header.layout.row.box-1
+      nav.btn-group
+        a.box-1(href="#search") search
+        a.box-1(href="#editor") editor
+        a.box-1(href="#colors") colors
 
-          section.ico.nav.search
-            form.btn-group
-              input(id="search", type="text", placeholder="placeholder")
-              button(class="ico find")
+      div.tab#search
+        include search
 
-          section.ico.nav.filter
-            form.btn-group
-              each i in ["date","url","host","path","protocol"]
-                input(type="radio", name="filter", class="ico " + i, value=i)
+      div.tab#editor
+        include editor
 
-          section.ico.nav.sort
-            div.btn-group
-              button(class="ico up")
-              button(class="ico down")
-
-        section#stage.layout.row.box-8
-
-          form.hslColors.ico
-            each olo in ["hue", "satur", "light"]
-              -var arr = (olo === "hue") ? [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330] : ["25%", "50%", "75%", "100%"]
-              select(name=olo)
-                each val in arr
-                  option= val
-
-    //- div#editPopup.nav
-    //-   h3.date
-    //-   input(type="text", class="title")
-    //-   input(type="text", class="url")
-
-    //-   div.btn-group
-    //-     button.ico.save
-    //-     button.ico.remove
-    //-     button.ico.cancel
+      div.tab#colors
+        include colors
 
     script(data-main="js/main", src="js/lib/require.js")
-
-

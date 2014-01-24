@@ -7,11 +7,11 @@ var
 
 (function(dirs) {
   var watcher = {
-    jade: function (fl) {
-      return 'jade -P ' + fl + ' -o .';
+    jade: function () {
+      return 'jade -P views/index.jade -o .';
     },
 
-    styl: function(fl) {
+    styl: function() {
       return 'stylus -c styles/main.styl -o css/';
     },
 

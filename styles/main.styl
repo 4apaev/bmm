@@ -1,72 +1,50 @@
-support-for-ie  = false
-vendor-prefixes = official
-nibdir = '../node_modules/nib'
-@import nibdir
+@import 'utils/vars'
+@import 'utils/shortcuts'
+@import 'utils/functions'
+@import 'utils/colors'
+@import 'utils/buttons'
+@import 'layout'
 @import 'reset'
-@import 'utils'
-@import 'icons'
 
 html, body
   height 100%
 
-.hidden
-  display: none
-
 body
   color txtClr
   font-size: 12px
-  lh(1,'*')
+  lh: 1
   font-family: Helvetica, arial, freesans, clean, sans-serif
 
-
-.layout
-  transition all 0.3s
-  display flex
-.layout.row
-  flex-direction: row
-.layout.col
-  flex-direction: column
-
-
-doFlex(1,10)
-
-.bmm
-  // max-width: 50%
-#bookmarks
-  overflow-x: hidden
-  overflow-y: auto
-  box-shadow 1px 0 0 lighten(brdClr,20)
-  // flex-grow: 2
-#results
-  // align-self: stretch
-  // flex-grow: 4
-#stage
-  overflow-x: hidden
-  overflow-y: auto
-
-header
-  box-shadow 0 1px 0 lighten(brdClr,20)
-  max-height:sz(4,'*')
 .lum
   padding step
 
+#root
+  overflow-x: hidden
+  overflow-y: auto
+
+nav a
+  background skyblue
+  flex 1
+  lh: 2,'*'
+  text-align: center
+
+.tab
+  shd(0 0 0 1px #000)
+  padding step
+  order 2
+  transition all .4s
+  &:target
+    order 1
+    flex 9
+
+
+// #search
+//   background: green
+// #editor
+//   background: yellow
+// #colors
+//   background: blue
+
+@import 'icons'
 @import 'nav'
 @import 'tree'
-
-// .sat
-//   display flex
-//   > div
-//     padding 8px
-//     flex 1
-//     position relative
-//     min-height: sz(4,'*')
-//     ul
-//       posall(sz(4))
-//       opacity: 0
-//       bg(#fff)
-//     &:hover ul
-//       opacity: 1
-
-// .disable-hover
-//   pointer-events: none !important
-

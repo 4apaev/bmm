@@ -5,12 +5,39 @@ posall(n)
   bottom n
   left n
 
-// center(w,h)
-//   width w
-//   height h
-//   position absolute
-//   top 50%
-//   left 50%
-//   margin-top (h/-2)
-//   margin-left (w/-2)
 
+
+
+// k = get(posHash, i)
+//     if k
+//       {k} : args[(i+1)]
+
+// apply(props)
+//    props = arguments if length(arguments) > 1
+//    for prop in props
+//      {prop[0]} prop[1]
+
+
+// posHash = (t top) (r right)  (b bottom) (l left)
+
+// get(hash, key)
+//   return pair[1] if pair[0] == key for pair in hash
+
+// pos()
+//   args = arguments
+//   for i in args
+//     // {i}[0] i[1]
+//     {i} 'olo'
+
+
+-poz(type, args)
+  i = 0
+  position: unquote(type)
+  for j in (1..8)
+    if length(args) > i
+      {args[i]}: args[i + 1] is a 'unit' ? args[i += 1] : 0
+    i += 1
+
+
+pos()
+  -pos('absolute', arguments)

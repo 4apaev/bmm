@@ -4,7 +4,7 @@
   ol
     display none
   li
-    lh()
+    lh:1
     padding-left: sz()
     vertical-align top
     position relative
@@ -35,8 +35,8 @@
 
   li input
     appearance()
-    absolute(top, left)
-    lh()
+    pos: top 0px, left 0px
+    lh:1
     width: 100%
     &:before
       color: brdClr
@@ -51,6 +51,4 @@
       > .kids-0
           order 2
       span
-        display: block
-        max-width: 100%
-        ellipsis()
+        ellipsis:1

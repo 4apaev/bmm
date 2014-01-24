@@ -35,3 +35,13 @@ define('modules/walk', [], function () {
 
 
 
+  // var marko = function (child) {
+  //   var btn = child.firstElementChild;
+  //   if(btn && btn.classList.contains('toggle') && !btn.checked) {
+  //     btn.click();
+  //     return marko(child.parentElement.parentElement);
+  //   } else {
+  //     return;
+  //   }
+  // }
+

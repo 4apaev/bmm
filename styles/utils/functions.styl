@@ -32,4 +32,21 @@ border(color, args...)
 doFlex(a,b)
   for x in a..b
     .box-{x}
-      flex: x x auto
+      flex: x //x auto
+
+apply(props)
+  props = arguments if length(arguments) > 1
+  for prop in props
+    {prop[0]} prop[1]
+
+pos(props)
+  position: absolute
+  apply(arguments)
+
+doUl()
+  ul
+    el = ''
+    for row in 1..4
+      el += ' li'
+      {el}
+        padding row * 10px
