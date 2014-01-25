@@ -1,10 +1,61 @@
-input[type="text"], input[type="number"]
-  background: #fff imp
+_baseBtn(n=2, fz=12px)
+  appearance: none
+  text-align: center
+  font-size: fz
+  height: sz(n, '*')
+  line-height: sz(n, '*')
+  padding: 0 sz(n)
+
+_baseInp(n=2, fz=12px)
   text-align: left
+  font-size: fz
+  height: sz(n, '*')
+  line-height: sz(n, '*')
+  padding: 0 sz(n)
+
+_defColors(bg=btnBgClr, clr=btnClr, bor=false)
+  background-color: bg
+  color: clr
+  if bor
+    box-shadow 0 0 0 1px bor
+
+//////////////////////////////////////////////////////////
+
+a
+  lh:1
+  display: inline-block
+
+nav
+  box-shadow: 0 1px 0 #ccc
+  a
+    _baseBtn:2
+    box-shadow: 1px 0 0 #ccc
+
+button, input[type="checkbox"]:not(.dir), input[type="radio"]
+  _baseBtn: 2
+  _defColors: _green2 #fff _green2
+  &:focus, &:checked
+    bg: _green1
+    box-shadow 0 0 0 1px _green1
+
+select, input[type="text"], input[type="number"]
+  _baseInp: 2
+  _defColors: #fff #777 _green2
+  &:focus
+    box-shadow 0 0 0 1px _green1
+
+select
+  appearance: none
 
 .btn-group
-  display: flex
+  display: inline-block
+  font-size: 0
+  rad = 3px
+  button, input, select
+    &:first-child
+      rd(rad 0 0 rad)
+    &:last-child
+      rd(0 rad rad 0)
 
-  button, input
-    btn()
-    brd()
+#editbox
+  margin:0 step

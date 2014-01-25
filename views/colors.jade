@@ -1,8 +1,6 @@
-form.hslColors.ico
-  each olo in ["hue", "satur", "light"]
+form.btn-group.row
+  each olo in ["hue", "sat", "lum"]
     -var arr = (olo === "hue") ? [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330] : ["25%", "50%", "75%", "100%"]
     select(name=olo)
       each val in arr
         option= val
-
-div#trg

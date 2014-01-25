@@ -2,8 +2,15 @@ imp = unquote('!important')
 
 ///////////////////////////////// Shadow
 brd()
-  box-shadow: arguments || 0 0 0 1px brdClr
-shd = brd
+  if arguments
+    box-shadow: arguments
+  else
+    box-shadow: 0 0 0 1px brdClr
+shd()
+  if arguments
+    box-shadow: arguments
+  else
+    box-shadow: 0 0 0 1px brdClr
 
 //////////////////////////////////////////////////
 appearance(type='none')

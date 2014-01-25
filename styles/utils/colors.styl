@@ -16,11 +16,3 @@ doHsl(increment, start, end)
     total = total + increment
 
 
-doKekeke(increment, start, end)
-  total = start
-  for n, x in 0..((end - start) / increment)
-    .colored-{x+1}
-      background: unquote('hsl(' + total + ', 100%, 50%)')
-    total = total + increment
-
-

@@ -147,3 +147,55 @@ define({
       , yellow: [255, 255, 0]
       , yellowgreen: [154, 205, 5]
 })
+
+
+
+
+// define({
+
+//     rgb2hex : function(r, g, b) {
+//         return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+//     },
+
+//     hex2rgb : function(hex) {
+//       return  hex.replace('#', '').match(/.{2}/g).map(function(chanel) { return parseInt(chanel, 16) });
+//     },
+
+
+
+//     hsl2rgb : function(h, s, l) {
+//         var
+//           m, c, x,
+//           arr = [];
+
+//         if (!isFinite(h)) h = 0;
+//         if (!isFinite(s)) s = 0;
+//         if (!isFinite(l)) l = 0;
+
+//         h /= 60;
+//         if (h < 0) h = 6 - (-h % 6);
+//         h %= 6;
+
+//         s = Math.max(0, Math.min(1, s / 100));
+//         l = Math.max(0, Math.min(1, l / 100));
+
+//         c = (1 - Math.abs((2 * l) - 1)) * s;
+//         x = c * (1 - Math.abs((h % 2) - 1));
+
+//         arr = [c,0,x];
+
+//         if (h < 3) arr = [0,c,x];
+//         if (h < 4) arr = [0,x,c];
+//         if (h < 5) arr = [x,0,c];
+//         if (h < 1) arr = [c,x,0];
+//         if (h < 2) arr = [x,c,0];
+
+//         m = l - c / 2;
+
+//         return arr.map(function(chanel) {
+//           return Math.round((chanel + m) * 255)
+//         });
+//     }
+// })
+
+

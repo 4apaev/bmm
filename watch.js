@@ -8,7 +8,7 @@ var
 (function(dirs) {
   var watcher = {
     jade: function () {
-      return 'jade -P views/index.jade -o .';
+      return 'jade views/index.jade -o .';
     },
 
     styl: function() {

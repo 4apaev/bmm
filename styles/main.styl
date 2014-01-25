@@ -2,7 +2,6 @@
 @import 'utils/shortcuts'
 @import 'utils/functions'
 @import 'utils/colors'
-@import 'utils/buttons'
 @import 'layout'
 @import 'reset'
 
@@ -15,35 +14,27 @@ body
   lh: 1
   font-family: Helvetica, arial, freesans, clean, sans-serif
 
+.hue
+  display: inline-table
+.sat
+  display: table-row
 .lum
+  display: table-cell
   padding step
 
-#root
-  overflow-x: hidden
-  overflow-y: auto
-
-nav a
-  background skyblue
-  flex 1
-  lh: 2,'*'
-  text-align: center
-
-.tab
-  shd(0 0 0 1px #000)
+header
   padding step
-  order 2
-  transition all .4s
-  &:target
-    order 1
-    flex 9
+  box-shadow: 0 1px 0 #ccc
+.tabs
+  display flex
+  pos: top sz(6,'*'), left 0px, bottom 0px, right 0px
+  > *
+    box-shadow: 1px 0 0 #ccc
+    flex 1
+    transition all .4s
+    &:target
+      flex 7
 
-
-// #search
-//   background: green
-// #editor
-//   background: yellow
-// #colors
-//   background: blue
 
 @import 'icons'
 @import 'nav'

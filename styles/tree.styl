@@ -1,6 +1,7 @@
 .tree
   padding: step
   box-sizing: border-box
+  overflow-y: auto
   ol
     display none
   li
@@ -18,6 +19,23 @@
       border-bottom: 1px solid
       box-sizing: border-box
       border-color: tan
+    span
+      ellipsis: 1
+      &:hover
+        bg: #eee
+        ~ b
+          opacity: 1
+    b
+      opacity: 0
+      pos: top 0, right 0
+      z-index: 999
+      cursor: pointer
+      padding: sz(4)
+      bg: _red
+      &:hover
+        opacity: 1
+
+
 
   li.kid:before
     width: sz()
@@ -34,10 +52,11 @@
     padding-left: sz(2)
 
   li input
-    appearance()
-    pos: top 0px, left 0px
+    appearance:none
+    pos: top 0, left 0
     lh:1
     width: 100%
+    z-index: 99
     &:before
       color: brdClr
 
@@ -50,5 +69,3 @@
           order 3
       > .kids-0
           order 2
-      span
-        ellipsis:1

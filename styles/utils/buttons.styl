@@ -1,17 +1,31 @@
-btn(bg=btnBgClr, clr=btnClr, h=sz(2,'*'))
+_baseBtn(n=2)
+  height: sz(n, '*')
+  line-height: sz(n, '*')
+  padding: 0 sz(n)
 
-  appearance('none')
-  border-radius:0
-  // display: inline-block
-  padding: 0 sz(2)
-  text-align: center
-  height: h
-  line-height: h
+
+defColors(bg=btnBgClr, clr=btnClr, br=brdClr)
   background-color: bg
   color: clr
+  box-shadow 0 0 0 1px br
+
+btn(bg=btnBgClr, clr=btnClr, br=brdClr)
+
+  appearance: none
+  text-align: center
+  _baseBtn()
+  defColors(bg,clr,br)
 
   &:hover, &:checked
     background-color: darken(bg,20)
     color: #fff
+
+inp(bg=#fff, clr=#777, br=#ccc)
+  _baseBtn()
+  defColors(bg,clr,br)
+
+  &:focus, &:checked
+    box-shadow 0 0 0 1px darken(br,20)
+
 
 

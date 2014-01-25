@@ -1,4 +1,4 @@
-define('app', ['modules/Bmm', 'modules/colors'], function (Bmm, colors) {
+define('app', ['modules/Bmm', 'modules/color/colors'], function (Bmm, colors) {
 
   // var
   //   body = document.body,
